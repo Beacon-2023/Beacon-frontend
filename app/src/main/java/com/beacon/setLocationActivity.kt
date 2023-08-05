@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.beacon.databinding.ActivityMainBinding
+import com.beacon.databinding.ActivitySetlocationBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -25,8 +25,8 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import java.util.Locale
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
-    private lateinit var binding: ActivityMainBinding
+class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivitySetlocationBinding
     var TAG:String = "로그"
     // FusedLocationProviderClient + 지자기 + 가속도 센서를 활용해 최적의 위치를 반환하는 구현체인 FusedLocationSource를 제공
     private lateinit var locationSource: FusedLocationSource
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivitySetlocationBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
 
