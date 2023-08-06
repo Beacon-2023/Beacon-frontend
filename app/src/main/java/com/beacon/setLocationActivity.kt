@@ -1,6 +1,7 @@
 package com.beacon
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
@@ -40,6 +41,15 @@ class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivitySetlocationBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
+
+        binding.btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
+
+        binding.btnOk.setOnClickListener {
+            val intent = Intent(this, setAddLocationActivity::class.java)
+            startActivity(intent)
+        }
 
         // 지도에 대한 뷰 역할만을 담당하는 프래그먼트 객체 얻기
         val fm = supportFragmentManager
@@ -88,7 +98,7 @@ class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 for ((i, location) in locationResult.locations.withIndex()) {
                     Log.d(TAG, "${location.latitude}, ${location.longitude}")
 
-                    binding.curAddress.setText("${location.latitude}, ${location.longitude}")
+                    //binding.curAddress.setText("${location.latitude}, ${location.longitude}")
                     Log.d(TAG, "주소 구하기 시작")
                     getAddress(location.latitude, location.longitude)
                     setLastLocation(location)
