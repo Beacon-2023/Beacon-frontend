@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.beacon.databinding.ActivitySetlocationBinding
 import com.beacon.databinding.ActivitySignUpBinding
-import com.beacon.databinding.ActivitySingInBinding
 import com.beacon.databinding.ActivityStartBinding
 
 class startActivity : AppCompatActivity() {

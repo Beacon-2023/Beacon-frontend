@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import com.beacon.databinding.ActivitySignUpBinding
-import com.beacon.databinding.ActivityStartBinding
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class signUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
@@ -17,8 +17,17 @@ class signUpActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this, setLocationActivity::class.java)
-            startActivity(intent)
+            super.onBackPressed()
+        }
+
+        binding.btnNext.isEnabled = false
+
+        var Id = binding.inputId.text.toString()
+        var pw = binding.inputPw.text.toString()
+
+        if(Id.length >= 6 && pw.length >= 6){
+            binding.btnNext.isEnabled = true
+            binding.btnNext.setBackgroundResource(R.drawable.border_radius_box)
         }
     }
 }
