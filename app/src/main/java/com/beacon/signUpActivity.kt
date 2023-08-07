@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import com.beacon.databinding.ActivitySignUpBinding
-import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class signUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
