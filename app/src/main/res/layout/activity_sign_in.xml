@@ -49,7 +49,7 @@
         app:layout_constraintVertical_bias="0.608" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_nologin"
+        android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00ff0000"

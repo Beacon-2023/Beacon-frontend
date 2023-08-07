@@ -16,7 +16,7 @@
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
@@ -49,6 +49,7 @@
 
     <EditText
         android:id="@+id/input_pw"
+        android:inputType="textPassword"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
@@ -63,6 +64,7 @@
 
     <EditText
         android:id="@+id/input_pw_check"
+        android:inputType="textPassword"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
@@ -93,7 +95,7 @@
         android:id="@+id/btn_next"
         android:layout_width="330dp"
         android:layout_height="60dp"
-        android:background="@drawable/border_radius_box_50per"
+        android:background="@drawable/border_radius_box"
         android:fontFamily="@font/fontmedium"
         android:text="다음"
         android:textColor="@color/white"

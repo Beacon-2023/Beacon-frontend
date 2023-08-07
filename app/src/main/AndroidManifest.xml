@@ -50,7 +50,7 @@
             android:exported="false" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="" />
+            android:value="yr1amg9f5j" />
     </application>
 
 </manifest>

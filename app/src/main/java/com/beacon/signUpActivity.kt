@@ -16,17 +16,22 @@ class signUpActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnNext.setOnClickListener {
+            val intent = Intent(this, setLocationActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
 
-        binding.btnNext.isEnabled = false
+        //binding.btnNext.isEnabled = false
 
         var Id = binding.inputId.text.toString()
         var pw = binding.inputPw.text.toString()
 
-        if(Id.length >= 6 && pw.length >= 6){
-            binding.btnNext.isEnabled = true
-            binding.btnNext.setBackgroundResource(R.drawable.border_radius_box)
-        }
+//        if(Id.length >= 6 && pw.length >= 6){
+//            binding.btnNext.isEnabled = true
+//            binding.btnNext.setBackgroundResource(R.drawable.border_radius_box)
+//        }
     }
 }
