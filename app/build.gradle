@@ -6,6 +6,7 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def NaverMapApiKey = properties.getProperty('NAVER_API_KEY')
 
 android {
     namespace 'com.beacon'
@@ -19,7 +20,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "NAVER_API_KEY", properties["api_key"]
+        manifestPlaceholders = [NaverMapApiKey:NaverMapApiKey]
     }
 
     buildTypes {
