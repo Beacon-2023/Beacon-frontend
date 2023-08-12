@@ -1,13 +1,13 @@
-package com.beacon
+package com.beacon.login
 
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
-import com.beacon.databinding.ActivitySetlocationBinding
-import com.beacon.databinding.ActivitySignUpBinding
 import com.beacon.databinding.ActivityStartBinding
+import com.beacon.signup.signUpActivity
+import com.beacon.NaviActivity
 
 class startActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
@@ -34,6 +34,11 @@ class startActivity : AppCompatActivity() {
 
         binding.btnSignup.setOnClickListener {
             val intent = Intent(this, signUpActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnNologin.setOnClickListener {
+            val intent = Intent(this, NaviActivity::class.java)
             startActivity(intent)
         }
     }

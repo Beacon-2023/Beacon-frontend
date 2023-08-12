@@ -1,4 +1,4 @@
-package com.beacon
+package com.beacon.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
