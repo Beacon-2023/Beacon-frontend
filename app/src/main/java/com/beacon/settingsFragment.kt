@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.beacon.R  // R 클래스의 경로를 정확히 수정해야 합니다.
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -44,7 +43,7 @@ class settingsFragment : Fragment() {
 
         val btnSetLanguage: Button = view.findViewById(R.id.btn_setLanguage)
         btnSetLanguage.setOnClickListener {
-            val intent = Intent(context, setLanguageMainActivity::class.java)
+            val intent = Intent(context, setLanguagActivity::class.java)
             startActivity(intent)
         }
 

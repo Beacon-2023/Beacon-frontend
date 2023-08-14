@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setLanguageMainActivity">
+    tools:context=".setLanguagActivity">
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.04" />
 
     <TextView
-        android:id="@+id/txt_phrase3"
+        android:id="@+id/txt_phrase1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontmedium"
@@ -39,20 +39,35 @@
         android:id="@+id/btn_korean"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:background="@drawable/border_radius_box_50"
+        android:background="@drawable/border_radius_box_50radius"
         android:fontFamily="@font/fontmedium"
         android:text="한국어"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.257" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signin3"
+        android:id="@+id/btn_중국어"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/border_radius_box_50_notcheck"
+        android:fontFamily="@font/fontmedium"
+        android:text="中國語"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.561" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_english"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box_50_notcheck"
@@ -61,39 +76,24 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintVertical_bias="0.403" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signin2"
+        android:id="@+id/btn_태국어"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box_50_notcheck"
         android:fontFamily="@font/fontmedium"
-        android:text="English"
+        android:text="แบบไทย"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signin"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:background="@drawable/border_radius_box_50_notcheck"
-        android:fontFamily="@font/fontmedium"
-        android:text="English"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454" />
+        app:layout_constraintVertical_bias="0.712" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

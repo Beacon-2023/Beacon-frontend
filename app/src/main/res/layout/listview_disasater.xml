@@ -5,34 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:layout_marginBottom="5dp">
+    android:padding="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="0dp">
 
     <TextView
         android:id="@+id/txt_disaster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="45dp"
         android:fontFamily="@font/fontlight"
         android:text="홍수 "
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.003" />
 
     <ImageView
         android:id="@+id/checkbox"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/txt_disaster"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043"
+        app:layout_constraintVertical_bias="0.012"
         app:srcCompat="@drawable/icon_check_mark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

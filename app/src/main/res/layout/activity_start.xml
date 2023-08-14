@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
         android:text="당신의 안전한\n오늘을 위해"
-        android:textSize="28dp"
         android:textColor="@color/black"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <TextView
         android:id="@+id/txt_phrase2"
@@ -27,30 +27,30 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontbold"
         android:text="Beacon"
-        android:textSize="36dp"
         android:textColor="@color/black"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintHorizontal_bias="0.215"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.199" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signin"
-        android:layout_width="300dp"
+        android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box"
         android:fontFamily="@font/fontmedium"
         android:text="로그인"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.725" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_nologin"
@@ -60,28 +60,28 @@
         android:fontFamily="@font/fontmedium"
         android:text="로그인 없이 사용할래요"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.925" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signup"
-        android:layout_width="300dp"
+        android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box"
         android:fontFamily="@font/fontmedium"
         android:text="회원가입"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.837" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

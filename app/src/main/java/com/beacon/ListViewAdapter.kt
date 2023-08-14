@@ -11,10 +11,9 @@ import android.widget.TextView
 
 // 프로필사진(이미지뷰), 이름(텍스트뷰)
 // 이미지를 숫자로 참조하기 위해 int로 받음
-class Data(val profile: Int, val name: String)
+class Data(val profile: Int, val name: String, val ischecked: Int)
 
 class ListViewAdapter(val context: Context, val DataList: ArrayList<Data>) : BaseAdapter() {
-
     override fun getCount() = DataList.size
 
     override fun getItem(position: Int) = DataList[position]
@@ -27,7 +26,11 @@ class ListViewAdapter(val context: Context, val DataList: ArrayList<Data>) : Bas
         val name = view.findViewById<TextView>(R.id.txt_disaster)
         val data = DataList[position]
 
-        profile.setImageResource(data.profile)
+        if (data.ischecked == 1) {
+            profile.setImageResource(data.profile)
+        } else if (data.ischecked == 0) {
+            profile.setImageResource(R.drawable.icon_blank_circle)
+        }
         name.text = data.name
         return view
     }
