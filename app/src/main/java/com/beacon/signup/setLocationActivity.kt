@@ -129,14 +129,14 @@ class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     Log.d(TAG, "getAddress함수 : 33이상")
                     // 반환 값에서 전체 주소만 사용한다.
                     // getAddressLine(0)
-                    Log.d(TAG, "변환된 주소 : ${address[0].getAddressLine(0)}")
+                    //Log.d(TAG, "변환된 주소 : ${address[0].getAddressLine(0)}")
                 }
             }
         } else { // API 레벨이 33 미만인 경우
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null) {
                 Log.d(TAG, "getAddress함수 : 33이하")
-                Log.d(TAG, "변환된 주소 : ${addresses[0].getAddressLine(0)}")
+                //.d(TAG, "변환된 주소 : ${addresses[0].getAddressLine(0)}")
             }
         }
     }
@@ -145,7 +145,7 @@ class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     //마커 생성 & 카메라 위치 이동
     fun setLastLocation(location: Location) {
         val myLocation = LatLng(location.latitude, location.longitude)
-
+        binding.txtLocation.setText("${location.latitude} ${location.longitude}")
         //마커 객체를 생성하는
         val marker = Marker()
         //마커 좌표 지정(필수)
@@ -156,13 +156,13 @@ class setLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         marker.width = Marker.SIZE_AUTO
         marker.height = Marker.SIZE_AUTO
 
-        //마커
-        //cameraUpdate => 카메라를 어떻게 움직일지를 나타내는 CameraUpdate 객체를 생성해야 합니다. CameraUpdate는 카메라를 이동할 위치, 방법 등을 정의하는 클래스
-        //scrollTo => 카메라의 대상 지점을 지정한 좌표로 변경합니다.
+//        마커
+//        cameraUpdate => 카메라를 어떻게 움직일지를 나타내는 CameraUpdate 객체를 생성해야 합니다. CameraUpdate는 카메라를 이동할 위치, 방법 등을 정의하는 클래스
+//        scrollTo => 카메라의 대상 지점을 지정한 좌표로 변경합니다.
         val cameraUpdate = CameraUpdate.scrollTo(myLocation)
         naverMap.moveCamera(cameraUpdate)
-        naverMap.maxZoom = 18.0
-        naverMap.minZoom = 5.0
+        naverMap.maxZoom = 20.0
+        naverMap.minZoom = 10.0
 
         //marker.map = null
     }

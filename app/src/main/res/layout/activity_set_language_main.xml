@@ -5,106 +5,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".signup.setLocationActivity">
+    tools:context=".setLanguageMainActivity">
 
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@color/white"
-        android:contentDescription="뒤로 가는 버튼"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.010" />
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="360dp"
-        android:layout_height="2px"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/phrase1"
+        android:id="@+id/txt_phrase3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/fontlight"
-        android:text="위치 설정"
-        android:textSize="28dp"
+        android:fontFamily="@font/fontmedium"
+        android:text="언어설정"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
-
-    <TextView
-        android:id="@+id/txt_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/fontlight"
-        android:text="1"
-        android:textSize="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.803" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map_fragment"
-        android:name="com.naver.maps.map.MapFragment"
-        android:layout_width="350dp"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_ok"
+        android:id="@+id/btn_korean"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border_radius_box"
+        android:layout_height="60dp"
+        android:background="@drawable/border_radius_box_50"
         android:fontFamily="@font/fontmedium"
-        android:text="현 위치가 맞습니다"
+        android:text="한국어"
         android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.309" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signin3"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/border_radius_box_50_notcheck"
+        android:fontFamily="@font/fontmedium"
+        android:text="English"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        app:layout_constraintVertical_bias="0.763" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_relocation"
+        android:id="@+id/btn_signin2"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/border_radius_box"
+        android:layout_height="60dp"
+        android:background="@drawable/border_radius_box_50_notcheck"
         android:fontFamily="@font/fontmedium"
-        android:text="위치 다시 잡기"
-        android:textColor="@color/white"
+        android:text="English"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.612" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signin"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/border_radius_box_50_notcheck"
+        android:fontFamily="@font/fontmedium"
+        android:text="English"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.454" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,9 +25,7 @@ class NaviActivity : AppCompatActivity() {
         binding.navigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.homeFragment -> setFragment(TAG_HOME, mainFragment())
-
                 R.id.messageFragment -> setFragment(TAG_MESSAGE, messageFragment())
-
                 R.id.settingsFragment-> setFragment(TAG_SETTINGS, settingsFragment())
             }
             true

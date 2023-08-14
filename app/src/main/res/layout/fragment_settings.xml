@@ -64,16 +64,17 @@
         app:layout_constraintVertical_bias="0.649" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_setGuildLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00ff0000"
         android:fontFamily="@font/fontlight"
         android:text="알림 받을 재난선택"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.535" />
@@ -85,22 +86,23 @@
         android:fontFamily="@font/fontlight"
         android:text="로그아웃"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintHorizontal_bias="0.216"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.73" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_setLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00ff0000"
         android:fontFamily="@font/fontlight"
-        android:text="알림 받을 재난선택"
+        android:text="언어설정"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.216"
@@ -109,19 +111,20 @@
         app:layout_constraintVertical_bias="0.32" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_setDisaster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00ff0000"
         android:fontFamily="@font/fontlight"
         android:text="알림 받을 재난선택"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintVertical_bias="0.118" />
 
     =
 
