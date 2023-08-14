@@ -43,13 +43,13 @@ class settingsFragment : Fragment() {
         }
 
         val btnSetLanguage: Button = view.findViewById(R.id.btn_setLanguage)
-        btnSetDisaster.setOnClickListener {
+        btnSetLanguage.setOnClickListener {
             val intent = Intent(context, setLanguageMainActivity::class.java)
             startActivity(intent)
         }
 
         val btnSetGuildLine: Button = view.findViewById(R.id.btn_setGuildLine)
-        btnSetDisaster.setOnClickListener {
+        btnSetGuildLine.setOnClickListener {
             val intent = Intent(context, setGuildLineActivity::class.java)
             startActivity(intent)
         }
