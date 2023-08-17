@@ -52,7 +52,11 @@ dependencies {
 
     // 둥근 버튼 생성
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    
+
+    //워크매니저
+    implementation "androidx.work:work-runtime-ktx:2.7.1" // kotlin
+
+    //Default imple
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
