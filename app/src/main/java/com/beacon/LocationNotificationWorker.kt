@@ -18,11 +18,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Tasks
 
-class LocationNotificationWorker(
-    appContext: Context,
-    workerParams: WorkerParameters
-) : Worker(appContext, workerParams) {
-
+class LocationNotificationWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     companion object {
         private const val TAG = "테스트"
         private const val CHANNEL_ID = "location_notification_channel"
