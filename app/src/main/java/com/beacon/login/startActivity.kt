@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,6 +20,11 @@ import com.beacon.signup.signUpActivity
 class startActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
     val MY_PERMISSION_ACCESS_ALL = 100
+
+    companion object {
+        const val DENIED = "denied"
+        const val EXPLAINED = "explained"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,12 @@ class startActivity : AppCompatActivity() {
             val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
             intent.data = Uri.parse("package:$packageName")
             startActivity(intent)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerForActivityResult.launch(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+            )
         }
 
         // 백그라운드 퍼미션
@@ -74,4 +86,25 @@ class startActivity : AppCompatActivity() {
             workManager.cancelAllWork()
         }
     }
+
+    private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
+        when {
+            deniedPermissionList.isNotEmpty() -> {
+                val map = deniedPermissionList.groupBy { permission ->
+                    if (shouldShowRequestPermissionRationale(permission)) DENIED else EXPLAINED
+                }
+                map[DENIED]?.let {
+                    // 단순히 권한이 거부 되었을 때
+                }
+                map[EXPLAINED]?.let {
+                    // 권한 요청이 완전히 막혔을 때(주로 앱 상세 창 열기)
+                }
+            }
+            else -> {
+                // 모든 권한이 허가 되었을 때
+            }
+        }
+    }
+
 }
