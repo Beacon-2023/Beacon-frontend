@@ -69,17 +69,9 @@ class startActivity : AppCompatActivity() {
         }
 
         binding.btnEraseWork.setOnClickListener {
-            Log.d("Test", "지금까지 대기열에 있는 작업을 삭제합니다.")
-            val uniqueTag = "my_unique_tag"
-            WorkManager.getInstance(this).cancelAllWorkByTag(uniqueTag)
-
-            WorkManager.getInstance(this).getWorkInfosByTag(uniqueTag).get().forEach { workInfo ->
-                Log.d("Test", "ID가 ${workInfo.id}인 작업이 취소되었습니다.")
-                Log.d("Test", "작업 상태: ${workInfo.state}")
-                Log.d("Test", "태그: ${workInfo.tags}")
-                Log.d("Test", "실행 시도 횟수: ${workInfo.runAttemptCount}")
-                // 필요한 경우 다른 속성에 액세스할 수 있습니다
-            }
+            Log.d("테스트", "지금까지 대기열에 있는 작업을 삭제합니다.")
+            val workManager = WorkManager.getInstance(this)
+            workManager.cancelAllWork()
         }
     }
 }
