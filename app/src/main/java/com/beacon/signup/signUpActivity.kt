@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.beacon.databinding.ActivitySignUpBinding
+import com.beacon.notUse.setLocationActivity
 
 class signUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding

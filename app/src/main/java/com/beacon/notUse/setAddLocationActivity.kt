@@ -1,4 +1,4 @@
-package com.beacon.signup
+package com.beacon.notUse
 
 import android.content.Intent
 import android.os.Bundle

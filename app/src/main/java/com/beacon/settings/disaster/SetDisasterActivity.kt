@@ -1,22 +1,19 @@
-package com.beacon
+package com.beacon.settings.disaster
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import com.beacon.R
 import com.beacon.databinding.ActivitySetDisasterBinding
-import com.beacon.databinding.ActivityStartBinding
+import com.beacon.settings.disaster.Data
+import com.beacon.settings.disaster.ListViewAdapter
 
 class setDisasterActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySetDisasterBinding
     var DataList = arrayListOf(
-        Data(R.drawable.icon_check_mark, "홍수",0),
-        Data(R.drawable.icon_check_mark, "지진",1),
-        Data(R.drawable.icon_check_mark, "산사태",0),
-        Data(R.drawable.icon_check_mark, "화산폭발",1)
+        Data(R.drawable.icon_check_mark, "홍수", 0),
+        Data(R.drawable.icon_check_mark, "지진", 1),
+        Data(R.drawable.icon_check_mark, "산사태", 0),
+        Data(R.drawable.icon_check_mark, "화산폭발", 1)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

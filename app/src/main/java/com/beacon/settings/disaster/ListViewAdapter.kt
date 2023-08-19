@@ -1,13 +1,13 @@
-package com.beacon
+package com.beacon.settings.disaster
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.beacon.R
 
 // 프로필사진(이미지뷰), 이름(텍스트뷰)
 // 이미지를 숫자로 참조하기 위해 int로 받음

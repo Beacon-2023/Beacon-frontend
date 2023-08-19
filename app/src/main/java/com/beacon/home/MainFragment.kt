@@ -1,4 +1,4 @@
-package com.beacon
+package com.beacon.home
 
 import android.annotation.SuppressLint
 import android.location.Geocoder
@@ -7,14 +7,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.beacon.databinding.ActivitySetlocationBinding
+import androidx.fragment.app.Fragment
+import com.beacon.R
 import com.beacon.databinding.FragmentSettingsBinding
-import com.beacon.signup.setLocationActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -35,7 +33,7 @@ import java.util.Locale
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class mainFragment : Fragment(), OnMapReadyCallback{
+class mainFragment : Fragment(), OnMapReadyCallback {
     var TAG: String = "로그"
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var locationSource: FusedLocationSource

@@ -1,4 +1,4 @@
-package com.beacon.signup
+package com.beacon.notUse
 
 import android.annotation.SuppressLint
 import android.content.Intent

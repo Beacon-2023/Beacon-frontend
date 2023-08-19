@@ -1,7 +1,6 @@
-package com.beacon
+package com.beacon.basicStart
 
 import android.app.Application
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.util.Log
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy

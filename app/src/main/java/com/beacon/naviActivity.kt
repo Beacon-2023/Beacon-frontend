@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.beacon.databinding.ActivityNaviBinding
+import com.beacon.home.mainFragment
+import com.beacon.message.messageFragment
+import com.beacon.settings.settingsFragment
 
 private const val TAG_MESSAGE = "message_fragment"
 private const val TAG_HOME = "main_fragment"
@@ -26,7 +29,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.homeFragment -> setFragment(TAG_HOME, mainFragment())
                 R.id.messageFragment -> setFragment(TAG_MESSAGE, messageFragment())
-                R.id.settingsFragment-> setFragment(TAG_SETTINGS, settingsFragment())
+                R.id.settingsFragment -> setFragment(TAG_SETTINGS, settingsFragment())
             }
             true
         }

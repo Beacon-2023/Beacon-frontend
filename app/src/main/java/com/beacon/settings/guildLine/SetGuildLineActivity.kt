@@ -1,7 +1,8 @@
-package com.beacon
+package com.beacon.settings.guildLine
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.beacon.R
 
 class setGuildLineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,10 +1,8 @@
-package com.beacon.signup
+package com.beacon.notUse
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.beacon.databinding.ActivitySetAddAdressBinding
-import com.beacon.databinding.ActivitySignInBinding
 
 class setAddAdressActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySetAddAdressBinding

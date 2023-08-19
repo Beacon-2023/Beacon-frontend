@@ -1,9 +1,10 @@
-package com.beacon
+package com.beacon.settings.language
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import com.beacon.R
 
 class setLanguagActivity : AppCompatActivity() {
     private lateinit var btnKorean: AppCompatButton

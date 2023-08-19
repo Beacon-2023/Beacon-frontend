@@ -1,4 +1,4 @@
-package com.beacon.login
+package com.beacon
 
 import android.Manifest
 import android.content.Intent
@@ -7,14 +7,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.work.WorkManager
-import com.beacon.NaviActivity
 import com.beacon.databinding.ActivityStartBinding
+import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
 
 class startActivity : AppCompatActivity() {

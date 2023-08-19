@@ -1,12 +1,16 @@
-package com.beacon
+package com.beacon.settings
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.beacon.R
+import com.beacon.settings.disaster.setDisasterActivity
+import com.beacon.settings.guildLine.setGuildLineActivity
+import com.beacon.settings.language.setLanguagActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

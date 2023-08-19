@@ -1,4 +1,4 @@
-package com.beacon
+package com.beacon.message
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.beacon.R
 
 class cardViewAdapter() :
     RecyclerView.Adapter<cardViewAdapter.MyViewHolder>() {
@@ -17,7 +18,7 @@ class cardViewAdapter() :
 
     // 1. Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): cardViewAdapter.MyViewHolder {
+                                    viewType: Int): MyViewHolder {
         // create a new view
         val cardView = LayoutInflater.from(parent.context)
             .inflate(R.layout.cardview, parent, false)
