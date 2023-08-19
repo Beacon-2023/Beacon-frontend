@@ -17,6 +17,7 @@ import androidx.work.WorkerParameters
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Tasks
+import com.google.firebase.messaging.FirebaseMessaging
 
 class LocationNotificationWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     companion object {
@@ -61,9 +62,9 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
             ) {
                 Log.d(TAG,"fetchCurrentLocation() 권한 존재 O")
                 val locationTask = fusedLocationClient.lastLocation
-                Log.d(TAG,"${locationTask}")
+                //Log.d(TAG,"${locationTask}")
                 val location = Tasks.await(locationTask)
-                Log.d(TAG,"${location}")
+                //Log.d(TAG,"${location}")
                 location
             } else {
                 Log.d(TAG,"fetchCurrentLocation() 권한 존재 X")
@@ -90,11 +91,24 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
             return
         }
 
+        // Retrieve the FCM
+        var fcm_tkn = "아직 제대로 안나와.."
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    Log.d("테스트", "Token: $token")
+                    fcm_tkn = token
+                } else {
+                    Log.d("테스트", "Failed to get token")
+                }
+            }
+
         //알림 생성
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.icon_rain)
             .setContentTitle("현재 위치")//알람 제목
-            .setContentText(getLocationText(location))//알람 내용 : 위치 정보
+            .setContentText(getLocationText(location) + "\n" + fcm_tkn)//알람 내용 : 위치 정보
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         val notificationManager = NotificationManagerCompat.from(applicationContext)

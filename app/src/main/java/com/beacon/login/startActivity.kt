@@ -80,11 +80,6 @@ class startActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnEraseWork.setOnClickListener {
-            Log.d("테스트", "지금까지 대기열에 있는 작업을 삭제합니다.")
-            val workManager = WorkManager.getInstance(this)
-            workManager.cancelAllWork()
-        }
     }
 
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

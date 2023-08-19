@@ -1,12 +1,14 @@
 package com.beacon
 
 import android.app.Application
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.util.Log
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.google.firebase.FirebaseApp
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
@@ -17,6 +19,10 @@ class StartApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this)
+
         Log.d("테스트", "==================================================")
         Log.d("테스트", "앱이 시작되었습니다")
         //<--------------workmanager test-------------->
@@ -39,7 +45,7 @@ class StartApplication : Application() {
                 .setConstraints(constraints)
                 .build()
 
-            Log.d("테스트", "Enqueuing workRequest!!!")
+            //Log.d("테스트", "Enqueuing workRequest!!!")
             workId = workRequest.id // 작업 ID를 저장합니다.
             // 작업을 큐에 추가합니다. 기존 작업이 없으므로 새 작업이 추가됩니다.
             workManager.enqueueUniquePeriodicWork(
@@ -47,7 +53,7 @@ class StartApplication : Application() {
                 ExistingPeriodicWorkPolicy.KEEP, // 기존 작업 유지 정책을 사용합니다.
                 workRequest
             )
-            Log.d("테스트", "WorkRequest enqueued!!!")
+            //Log.d("테스트", "WorkRequest enqueued!!!")
         } else {
             Log.d("테스트", "WorkRequest already exists!!!") // 작업이 이미 큐에 있는 경우
             val workManager = WorkManager.getInstance(this)
@@ -72,7 +78,7 @@ class StartApplication : Application() {
                 ExistingPeriodicWorkPolicy.KEEP, // 기존 작업 유지 정책을 사용합니다.
                 workRequest
             )
-            Log.d("테스트", "WorkRequest enqueued!!!")
+            //og.d("테스트", "WorkRequest enqueued!!!")
         }
     }
 }
