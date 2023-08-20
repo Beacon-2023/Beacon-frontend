@@ -99,17 +99,18 @@ class mainFragment : Fragment(), OnMapReadyCallback {
             interval = 1000 //1초에 한번씩 GPS 요청
         }
 
-        //location 요청 함수 호출 (locationRequest, locationCallback)
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for ((i, location) in locationResult.locations.withIndex()) {
                     Log.d(TAG, "${location.latitude}, ${location.longitude}")
 
-                    //binding.curAddress.setText("${location.latitude}, ${location.longitude}")
-                    Log.d(TAG, "주소 구하기 시작")
-                    getAddress(location.latitude, location.longitude)
-                    setLastLocation(location)
+                    // Check if the fragment is still attached
+                    if (isAdded) {
+                        // Only perform operations when the fragment is attached
+                        getAddress(location.latitude, location.longitude)
+                        setLastLocation(location)
+                    }
                 }
             }
         }

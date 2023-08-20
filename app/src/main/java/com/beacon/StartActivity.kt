@@ -1,8 +1,10 @@
 package com.beacon
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
+import java.util.Locale
 
 class startActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
@@ -25,10 +28,14 @@ class startActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAppLocale()
+
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
+
+
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
             || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -68,7 +75,7 @@ class startActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnSignup.setOnClickListener {
+        binding.btnLoginToSignup.setOnClickListener {
             val intent = Intent(this, signUpActivity::class.java)
             startActivity(intent)
         }
@@ -78,6 +85,20 @@ class startActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    fun setAppLocale() {
+        val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val language = sharedPreferences.getString("My_Lang", "")
+        if (!language.isNullOrBlank()) {
+            val locale = Locale(language)
+            Locale.setDefault(locale)
+
+            val config = Configuration()
+            config.setLocale(locale)
+
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
     }
 
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

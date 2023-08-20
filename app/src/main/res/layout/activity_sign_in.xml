@@ -7,7 +7,7 @@
     tools:context=".login.signInActivity">
 
     <TextView
-        android:id="@+id/txt_phrase1"
+        android:id="@+id/txt_languagePhrase1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.865" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_loginToSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00ff0000"
@@ -84,7 +84,7 @@
         app:layout_constraintVertical_bias="0.95" />
 
     <TextView
-        android:id="@+id/txt_phrase2"
+        android:id="@+id/txt_startPhrase2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontbold"

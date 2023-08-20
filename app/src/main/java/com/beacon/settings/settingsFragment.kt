@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.beacon.R
 import com.beacon.settings.disaster.setDisasterActivity
 import com.beacon.settings.guildLine.setGuildLineActivity
-import com.beacon.settings.language.setLanguagActivity
+import com.beacon.settings.language.setLanguageActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -47,7 +47,7 @@ class settingsFragment : Fragment() {
 
         val btnSetLanguage: Button = view.findViewById(R.id.btn_setLanguage)
         btnSetLanguage.setOnClickListener {
-            val intent = Intent(context, setLanguagActivity::class.java)
+            val intent = Intent(context, setLanguageActivity::class.java)
             startActivity(intent)
         }
 

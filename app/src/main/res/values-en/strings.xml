@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">beacon</string>
+    <string name="txt_logo1"><![CDATA[For your safe\ntoday]]></string>
+    <string name="txt_logo2">beacon</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_logout">Logout</string>
+    <string name="txt_noLogin">Use without subscription</string>
+</resources>

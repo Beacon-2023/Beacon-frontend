@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".settings.language.setLanguagActivity"
+            android:name=".settings.language.setLanguageActivity"
             android:exported="false" />
         <activity
             android:name=".settings.guildLine.setGuildLineActivity"
@@ -60,9 +60,7 @@
             android:exported="false" />
         <activity
             android:name=".notUse.setAddLocationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_set_add_location"
-            android:theme="@style/Theme.Beacon" />
+            android:exported="false" />
         <activity
             android:name=".notUse.setLocationActivity"
             android:exported="false" />

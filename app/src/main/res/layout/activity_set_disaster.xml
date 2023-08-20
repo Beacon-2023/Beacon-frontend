@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.925" />
 
     <TextView
-        android:id="@+id/txt_phrase3"
+        android:id="@+id/txt_setDiasasterPhrase1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontmedium"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <TextView
-        android:id="@+id/txt_phrase2"
+        android:id="@+id/txt_setDiasasterPhrase2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
@@ -69,12 +69,13 @@
         android:id="@+id/listview"
         android:layout_width="360dp"
         android:layout_height="400dp"
+        android:layout_marginTop="44dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_phrase2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_setDiasasterPhrase2"
         app:layout_constraintVertical_bias="0.636" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

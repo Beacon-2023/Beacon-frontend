@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.091" />
 
     <TextView
-        android:id="@+id/txt_phrase2"
+        android:id="@+id/txt_signupPhrase1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.651" />
 
     <TextView
-        android:id="@+id/txt_phrase4"
+        android:id="@+id/txt_signupPhrase3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
@@ -108,7 +108,7 @@
         app:layout_constraintVertical_bias="0.816" />
 
     <TextView
-        android:id="@+id/txt_phrase3"
+        android:id="@+id/txt_signupPhrase2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"

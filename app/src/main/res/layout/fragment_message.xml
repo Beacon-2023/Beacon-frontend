@@ -19,11 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/txt_messagePhrase1"
         app:layout_constraintVertical_bias="0.034"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_messagePhrase1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"

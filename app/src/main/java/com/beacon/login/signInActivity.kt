@@ -19,7 +19,7 @@ class signInActivity : AppCompatActivity() {
         var view = binding.root
         setContentView(view)
 
-        binding.btnSignup.setOnClickListener{
+        binding.btnLoginToSignup.setOnClickListener{
             val intent = Intent(this, signUpActivity::class.java)
             startActivity(intent)
         }

@@ -7,11 +7,11 @@
     tools:context=".startActivity">
 
     <TextView
-        android:id="@+id/txt_phrase1"
+        android:id="@+id/txt_logo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
-        android:text="당신의 안전한\n오늘을 위해"
+        android:text= "@string/txt_logo1"
         android:textColor="@color/black"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,11 +22,11 @@
         app:layout_constraintVertical_bias="0.09" />
 
     <TextView
-        android:id="@+id/txt_phrase2"
+        android:id="@+id/txt_logo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontbold"
-        android:text="Beacon"
+        android:text="@string/txt_logo2"
         android:textColor="@color/black"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,7 @@
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box"
         android:fontFamily="@font/fontmedium"
-        android:text="로그인"
+        android:text="@string/txt_login"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:background="#00ff0000"
         android:fontFamily="@font/fontmedium"
-        android:text="로그인 없이 사용할래요"
+        android:text="@string/txt_noLogin"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,15 +66,15 @@
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
+        app:layout_constraintVertical_bias="0.922" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_loginToSignup"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_box"
         android:fontFamily="@font/fontmedium"
-        android:text="회원가입"
+        android:text="@string/txt_logout"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
