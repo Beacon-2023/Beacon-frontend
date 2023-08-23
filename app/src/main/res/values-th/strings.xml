@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">beacon</string>
+    <string name="txt_logo1">ความปลอดภัยของคุณ\nสำหรับวันนี้</string>
+    <string name="txt_logo2">beacon</string>
+    <string name="txt_login">การลงชื่อเข้าสู่ระบบ</string>
+    <string name="txt_logout">การออกจากระบบ</string>
+    <string name="txt_noLogin">ฉันจะใช้โดยไม่ต้องล็อกอิน</string>
+    <string name="hint_id">ป้อนไอดี</string>
+    <string name="hint_pw">ป้อนรหัสผ่าน</string>
+    <string name="txt_signup">การสมัครสมาชิก</string>
+    <string name="txt_setDiasaster1">เลือกการแจ้งเตือนภัยพิบัติ</string>
+    <string name="txt_setDiasaster2">เลือกภัยพิบัติที่ต้องการแจ้งเตือน\n ส่งการแจ้งเตือนเมื่อเกิดภัยพิบัติค่ะ</string>
+    <string name="txt_setGuild">ตั้งค่าการเตือนภัยพิบัติ</string>
+    <string name="txt_setGuild2">ให้คำแนะนำที่คุณป้อนไว้ล่วงหน้าในกรณีที่เกิดภัยพิบัติ</string>
+    <string name="txt_signupPhrase">ที่จำเป็นสำหรับการสมัครสมาชิก\n กรุณากรอกข้อมูลค่ะ!</string>
+    <string name="txt_constraint_Id">มากกว่า 6 ตัวอักษร</string>
+    <string name="txt_constraint_pw">รวมตัวอักษรภาษาอังกฤษมากกว่า 6 ตัวอักษร</string>
+    <string name="txt_constraint_confirm_pw">ยืนยันรหัสผ่าน</string>
+    <string name="setting_message">เกี่ยวกับข้อความภัยพิบัติ</string>
+    <string name="setting_alram">เลือกภัยพิบัติที่จะแจ้งให้ทราบ</string>
+    <string name="setting_language">ตั้งค่าภาษา</string>
+    <string name="setting_guildline">แนวปฏิบัติเกี่ยวกับภัยพิบัติ</string>
+    <string name="setting_custom_guildline">การประยุกต์ใช้แนวทางภัยพิบัติส่วนบุคคล</string>
+    <string name="setting_userInfor">ข้อมูลสมาชิก</string>
+    <string name="setting_logout">การออกจากระบบ</string>
+    <string name="message_recent">สัญญาณเตือนล่าสุด</string>
+    <string name="nav_home">บ้าน</string>
+    <string name="nav_message">การแจ้งเตือนภัยพิบัติ</string>
+    <string name="nav_setting">การทำ</string>
+</resources>

@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">beacon</string>
+    <string name="txt_logo1">"あなたの安全な\n今日のために "</string>
+    <string name="txt_logo2">beacon</string>
     <string name="txt_login">ログ・イン</string>
     <string name="txt_logout">ログ・アウト</string>
+    <string name="txt_noLogin">ログインなしで使います</string>
+    <string name="hint_id">ID入力</string>
+    <string name="hint_pw">パスワード入力</string>
+    <string name="txt_signup">会員加入</string>
+    <string name="txt_setDiasaster1">通知災害選択</string>
+    <string name="txt_setDiasaster2">通知を受けたい災害を選択すると\n 災害発生時に通知を送信します。</string>
+    <string name="txt_setGuild">カスタム·ガイドライン</string>
+    <string name="txt_setGuild2">災害発生時にユーザーが事前に入力しておいたガイドラインを提供します。</string>
+    <string name="txt_signupPhrase">会員登録に必要な\n情報をご記入ください！</string>
+    <string name="txt_constraint_Id">6文字以上</string>
+    <string name="txt_constraint_pw">英字を含む6文字以上</string>
+    <string name="txt_constraint_confirm_pw">パスワード確認</string>
+    <string name="setting_message">災害メッセージ関連</string>
+    <string name="setting_alram">通知を受ける災害を選択</string>
+    <string name="setting_language">言語設定</string>
+    <string name="setting_guildline">ガイドライン.</string>
+    <string name="setting_custom_guildline">カスタムガイドラインの適用</string>
+    <string name="setting_userInfor">会員情報</string>
+    <string name="setting_logout">ログアウト, ログオフ.</string>
+    <string name="message_recent">最近の警報</string>
+    <string name="nav_home">溝</string>
+    <string name="nav_message">災害通知</string>
+    <string name="nav_setting">設定.</string>
 </resources>

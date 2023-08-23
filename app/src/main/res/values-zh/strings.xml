@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">beacon</string>
+    <string name="txt_logo1">为了你安全的今天</string>
+    <string name="txt_logo2">beacon</string>
+    <string name="txt_login">注册</string>
+    <string name="txt_logout">注销</string>
+    <string name="txt_noLogin">不用登录使用</string>
+    <string name="hint_id">输入用户名</string>
+    <string name="hint_pw">输入密码</string>
+    <string name="txt_signup">注册会员</string>
+    <string name="txt_setDiasaster1">选择提醒灾难</string>
+    <string name="txt_setDiasaster2">如果选择想要收到通知的灾难，\n灾难发生时发送通知。</string>
+    <string name="txt_setGuild">定制准则</string>
+    <string name="txt_setGuild2">灾难发生时提供用户提前输入的指导方针。</string>
+    <string name="txt_signupPhrase">请填写注册会员所需的\n信息！</string>
+    <string name="txt_constraint_Id">6个字以上</string>
+    <string name="txt_constraint_pw">包含英文字母的6个字以上</string>
+    <string name="txt_constraint_confirm_pw">密码确认</string>
+    <string name="setting_message">灾难信息相关</string>
+    <string name="setting_alram">选择收到通知的灾难</string>
+    <string name="setting_language">语言设置</string>
+    <string name="setting_guildline">灾难指南</string>
+    <string name="setting_custom_guildline">用户灾难指南</string>
+    <string name="setting_userInfor">会员信息</string>
+    <string name="setting_logout">注销</string>
+    <string name="message_recent">最近警报</string>
+    <string name="nav_home">家</string>
+    <string name="nav_message">灾难通知</string>
+    <string name="nav_setting">设定</string>
+</resources>
