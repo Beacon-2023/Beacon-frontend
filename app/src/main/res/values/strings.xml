@@ -1,10 +1,38 @@
 <resources>
     <string name="app_name">beacon</string>
 
+    <string name="defaultSenderId" translatable="false">YOUR_DEFAULT_SENDER_ID</string>
+
     <string name="txt_logo1">당신의 안전한\n오늘을 위해</string>
     <string name="txt_logo2">beacon</string>
     <string name="txt_login">로그인</string>
     <string name="txt_logout">로그아웃</string>
     <string name="txt_noLogin">로그인 없이 사용할래요</string>
+    <string name="hint_id">아이디 입력</string>
+    <string name="hint_pw">비밀번호 입력</string>
+    <string name="txt_signup">회원가입</string>
+    <string name="txt_setDiasaster1">알림 재난 선택</string>
+    <string name="txt_setDiasaster2">알림 받고 싶은 재난을 선택하면\\n재난 발생 시 알림을 발송합니다.</string>
+    <string name="txt_setGuild">커스텀 가이드라인</string>
+    <string name="txt_setGuild2">재난 발생 시 사용자가 미리 입력해둔 가이드라인을 제공합니다.</string>
+    <string name="txt_signupPhrase">회원가입에 필요한\\n정보를 기입해주세요!</string>
+    <string name="txt_constraint_Id">6자 이상</string>
+    <string name="txt_constraint_pw">영문자 포함 6자 이상</string>
+    <string name="txt_constraint_confirm_pw">비밀번호 확인</string>
+    <string name="setting_message">재난 메시지 관련</string>
+    <string name="setting_alram">알림 받을 재난을 선택</string>
+    <string name="setting_language">언어 설정</string>
+    <string name="setting_guildline">가이드라인</string>
+    <string name="setting_custom_guildline">커스텀 가이드라인 적용</string>
+    <string name="setting_userInfor">회원정보</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="message_recent">최근 경보</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+
+    <string name="nav_home">홈</string>
+    <string name="nav_message">재난 알림</string>
+    <string name="nav_setting">설정</string>
 
 </resources>

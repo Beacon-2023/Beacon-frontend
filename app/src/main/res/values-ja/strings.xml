@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">beacon</string>
+    <string name="txt_login">ログ・イン</string>
+    <string name="txt_logout">ログ・アウト</string>
+</resources>

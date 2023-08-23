@@ -6,4 +6,26 @@
     <string name="txt_login">Login</string>
     <string name="txt_logout">Logout</string>
     <string name="txt_noLogin">Use without subscription</string>
+    <string name="hint_id">Input ID</string>
+    <string name="hint_pw">Input PW</string>
+    <string name="txt_signup">SignUp</string>
+    <string name="txt_setDiasaster1">Choose disaster</string>
+    <string name="txt_setDiasaster2"><![CDATA[If you choose disaster\nwhen disaster occurs send alram]]></string>
+    <string name="txt_setGuild">Custom GuildLine</string>
+    <string name="txt_setGuild2"><![CDATA[when disaster occurs priovides guildline was written by user]]></string>
+    <string name="txt_signupPhrase">Please fill out the information required to sign up!</string>
+    <string name="txt_constraint_Id">6 characters or more</string>
+    <string name="txt_constraint_pw">6 or more characters including English characters</string>
+    <string name="txt_constraint_confirm_pw">Confirm password</string>
+    <string name="setting_message">Disaster messages</string>
+    <string name="setting_alram">Select a disaster to be notified</string>
+    <string name="setting_language">Language Settings</string>
+    <string name="setting_guildline">Guideline</string>
+    <string name="setting_custom_guildline">Apply Custom Guidelines</string>
+    <string name="setting_userInfor">User Information</string>
+    <string name="setting_logout">Logout</string>
+    <string name="message_recent">The latest disaster</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_message">Notification</string>
+    <string name="nav_setting">Settings</string>
 </resources>

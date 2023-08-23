@@ -1,5 +1,6 @@
 package com.beacon.login
 
+import BaseActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,7 @@ import com.beacon.signup.signUpActivity
 import okhttp3.*
 import java.io.IOException
 
-class signInActivity : AppCompatActivity() {
+class signInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -35,17 +35,17 @@
 
     <TextView
         android:id="@+id/txt_signupPhrase1"
-        android:layout_width="wrap_content"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
-        android:text="회원가입에 필요한\n정보를 기입해주세요!"
+        android:text="@string/txt_signupPhrase"
         android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <EditText
         android:id="@+id/input_pw"
@@ -53,7 +53,7 @@
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
-        android:hint="영문 및 숫자를 포함한 6자 이상"
+        android:hint="@string/txt_constraint_pw"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
-        android:text="비밀번호 입력"
+        android:text="@string/hint_pw"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontlight"
-        android:text="아이디 입력"
+        android:text="@string/hint_id"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
-        android:hint="6자 이상"
+        android:hint="@string/txt_constraint_Id"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

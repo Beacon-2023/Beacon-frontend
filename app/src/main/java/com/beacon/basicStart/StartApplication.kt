@@ -23,12 +23,12 @@ class StartApplication : Application() {
     }
 
     override fun onCreate() {
-        setAppLocale()
+        //setAppLocale()
 
         super.onCreate()
 
 
-        getCurrentLocale(this)
+        //getCurrentLocale(this)
 
         // Initialize Firebase
         FirebaseApp.initializeApp(this)
@@ -39,35 +39,36 @@ class StartApplication : Application() {
         val workManager = WorkManager.getInstance(this) // WorkManager 인스턴스를 가져옵니다.
         val uniqueWorkName = "my_unique_recurring_work_name" // 작업의 고유 이름을 정의합니다.
 
-
-
         // 이미 큐에 동일한 이름의 작업이 있는지 확인합니다.
-        val workQuery = workManager.getWorkInfosForUniqueWork(uniqueWorkName)
-        val workInfoList = workQuery.get()
+        val workQuery = workManager.getWorkInfosForUniqueWork(uniqueWorkName)//특정 이름의 작업들가져오기
+        val workInfoList = workQuery.get()//리스트 형태로 가져오기
 
-        if (workInfoList.isEmpty()) { // 작업이 큐에 없는 경우
+        // 큐가 비어있다 => 워크 매니저 실행
+        if (workInfoList.isEmpty()) {
+            // 제약(네트워크)
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
             Log.d("테스트", "workRequest 요청!!!")
+            // 15분 반복 주기 + 제약 달기
             val workRequest = PeriodicWorkRequest.Builder(
                 LocationNotificationWorker::class.java, 15, TimeUnit.MINUTES
             )
                 .setConstraints(constraints)
                 .build()
 
-            //Log.d("테스트", "Enqueuing workRequest!!!")
+            // 작업을 큐에 추가
             workId = workRequest.id // 작업 ID를 저장합니다.
-            // 작업을 큐에 추가합니다. 기존 작업이 없으므로 새 작업이 추가됩니다.
             workManager.enqueueUniquePeriodicWork(
                 uniqueWorkName,
                 ExistingPeriodicWorkPolicy.KEEP, // 기존 작업 유지 정책을 사용합니다.
                 workRequest
             )
-            //Log.d("테스트", "WorkRequest enqueued!!!")
-        } else {
-            Log.d("테스트", "WorkRequest already exists!!!") // 작업이 이미 큐에 있는 경우
+        }
+        // 작업이 이미 큐에 있는 경우
+        else {
+            Log.d("테스트", "WorkRequest already exists!!!")
             val workManager = WorkManager.getInstance(this)
             workManager.cancelAllWork()
 
@@ -90,22 +91,6 @@ class StartApplication : Application() {
                 ExistingPeriodicWorkPolicy.KEEP, // 기존 작업 유지 정책을 사용합니다.
                 workRequest
             )
-            //og.d("테스트", "WorkRequest enqueued!!!")
-
-        }
-    }
-
-    fun setAppLocale() {
-        val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")
-        if (!language.isNullOrBlank()) {
-            val locale = Locale(language)
-            Locale.setDefault(locale)
-
-            val config = Configuration()
-            config.setLocale(locale)
-
-            resources.updateConfiguration(config, resources.displayMetrics)
         }
     }
 

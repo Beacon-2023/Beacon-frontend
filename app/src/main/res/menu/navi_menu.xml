@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:title="홈"
+        android:title="@string/nav_home"
         android:icon="@drawable/navi_home"/>
     <item
         android:id="@+id/messageFragment"
-        android:title="알림메시지"
+        android:title="@string/nav_message"
         android:icon="@drawable/navi_mail"/>
     <item
         android:id="@+id/settingsFragment"
-        android:title="설정"
+        android:title="@string/nav_setting"
         android:icon="@drawable/navi_settings"/>
 </menu>

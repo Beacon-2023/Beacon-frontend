@@ -1,5 +1,6 @@
 package com.beacon
 
+import BaseActivity
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -18,7 +19,7 @@ import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
 import java.util.Locale
 
-class startActivity : AppCompatActivity() {
+class startActivity : BaseActivity() {
     private lateinit var binding: ActivityStartBinding
     val MY_PERMISSION_ACCESS_ALL = 100
 
@@ -28,8 +29,6 @@ class startActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setAppLocale()
-
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         var view = binding.root
@@ -85,20 +84,6 @@ class startActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-    }
-
-    fun setAppLocale() {
-        val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")
-        if (!language.isNullOrBlank()) {
-            val locale = Locale(language)
-            Locale.setDefault(locale)
-
-            val config = Configuration()
-            config.setLocale(locale)
-
-            resources.updateConfiguration(config, resources.displayMetrics)
-        }
     }
 
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->

@@ -1,5 +1,6 @@
 package com.beacon.settings.disaster
 
+import BaseActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.beacon.R
@@ -7,7 +8,7 @@ import com.beacon.databinding.ActivitySetDisasterBinding
 import com.beacon.settings.disaster.Data
 import com.beacon.settings.disaster.ListViewAdapter
 
-class setDisasterActivity : AppCompatActivity() {
+class setDisasterActivity : BaseActivity() {
     private lateinit var binding : ActivitySetDisasterBinding
     var DataList = arrayListOf(
         Data(R.drawable.icon_check_mark, "홍수", 0),

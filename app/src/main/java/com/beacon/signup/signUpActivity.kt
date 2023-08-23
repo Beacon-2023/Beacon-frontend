@@ -1,12 +1,13 @@
 package com.beacon.signup
 
+import BaseActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.beacon.databinding.ActivitySignUpBinding
 import com.beacon.notUse.setLocationActivity
 
-class signUpActivity : AppCompatActivity() {
+class signUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

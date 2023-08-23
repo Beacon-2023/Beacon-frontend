@@ -93,7 +93,7 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
         }
 
         // Retrieve the FCM
-        var fcm_tkn = "아직 제대로 안나와.."
+        var fcm_tkn = "비어있는 토큰"
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

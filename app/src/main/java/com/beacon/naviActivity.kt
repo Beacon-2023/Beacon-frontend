@@ -1,5 +1,6 @@
 package com.beacon
 
+import BaseActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,7 +14,7 @@ private const val TAG_MESSAGE = "message_fragment"
 private const val TAG_HOME = "main_fragment"
 private const val TAG_SETTINGS = "settings_fragment"
 
-class NaviActivity : AppCompatActivity() {
+class NaviActivity : BaseActivity() {
 
     private lateinit var binding : ActivityNaviBinding
 

@@ -1,18 +1,21 @@
 package com.beacon.settings.language
 
+import BaseActivity
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import com.beacon.R
 import java.util.Locale
 
-class setLanguageActivity : AppCompatActivity() {
+class setLanguageActivity : BaseActivity() {
     private lateinit var btnKorean: AppCompatButton
     private lateinit var btnChinese: AppCompatButton
     private lateinit var btnEnglish: AppCompatButton
