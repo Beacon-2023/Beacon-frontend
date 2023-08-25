@@ -3,13 +3,17 @@ package com.beacon
 import BaseActivity
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -17,6 +21,16 @@ import androidx.core.content.ContextCompat
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
+import java.io.BufferedReader
+import java.io.DataOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.UnsupportedEncodingException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
+import java.net.URLEncoder
 import java.util.Locale
 
 class startActivity : BaseActivity() {
@@ -83,9 +97,61 @@ class startActivity : BaseActivity() {
             val intent = Intent(this, NaviActivity::class.java)
             startActivity(intent)
         }
-
     }
 
+    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String): String {
+        val con = connect(apiUrl)
+        val postParams = "source=ko&target=en&text=$text" // Source language: Korean (ko) -> Target language: English (en)
+        try {
+            con.requestMethod = "POST"
+            for ((key, value) in requestHeaders) {
+                con.setRequestProperty(key, value)
+            }
+
+            con.doOutput = true
+            DataOutputStream(con.outputStream).use { wr ->
+                wr.write(postParams.toByteArray())
+                wr.flush()
+            }
+
+            val responseCode = con.responseCode
+            return if (responseCode == HttpURLConnection.HTTP_OK) { // normal response
+                readBody(con.inputStream)
+            } else { // error response
+                readBody(con.errorStream)
+            }
+        } catch (e: IOException) {
+            throw RuntimeException("API request and response failed", e)
+        } finally {
+            con.disconnect()
+        }
+    }
+
+    private fun connect(apiUrl: String): HttpURLConnection {
+        return try {
+            val url = URL(apiUrl)
+            url.openConnection() as HttpURLConnection
+        } catch (e: MalformedURLException) {
+            throw RuntimeException("The API URL is invalid. : $apiUrl", e)
+        } catch (e: IOException) {
+            throw RuntimeException("Connection failed: $apiUrl", e)
+        }
+    }
+
+    private fun readBody(body: InputStream): String {
+        val streamReader = InputStreamReader(body)
+        BufferedReader(streamReader).use { lineReader ->
+            val responseBody = StringBuilder()
+
+            var line: String?
+            while (lineReader.readLine().also { line = it } != null) {
+                responseBody.append(line)
+            }
+
+            return responseBody.toString()
+        }
+    }
+    //권한 얻는
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
         when {

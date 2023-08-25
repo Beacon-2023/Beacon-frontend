@@ -2,14 +2,20 @@ package com.beacon.login
 
 import BaseActivity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.beacon.NaviActivity
 import com.beacon.databinding.ActivitySignInBinding
 import com.beacon.signup.signUpActivity
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.Response
+import org.json.JSONObject
 import java.io.IOException
 
 class signInActivity : BaseActivity() {
@@ -30,55 +36,63 @@ class signInActivity : BaseActivity() {
             val userId= binding.inputId.text.toString()
             val userPw= binding.inputPw.text.toString()
 
-            loginUser(userId,userPw)
+            //null체크
+            if(userId == "" || userPw == ""){
+                runOnUiThread {
+                    val alertDialog = AlertDialog.Builder(this@signInActivity)
+                        .setTitle("빈 칸이 존재합니다.")
+                        .setMessage("모든 칸을 작성해주세요!")
+                        .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                        .create()
+                    alertDialog.show()
+                }
+            }
+            else {
+                loginUser(userId,userPw)
+            }
         }
     }
 
+
     private fun loginUser(userId: String, userPw: String) {
-        Log.d("로그인", "로그인 시도")
-        Log.d("로그인", "ID : ${userId} PW : ${userPw}")
+        Log.d("로그인", "로그인을 시도합니다 ID: $userId PW: $userPw Email: $userPw")
+
         val client = OkHttpClient()
-        val url_login = "/member-controller/login"
 
-        //요청 바디에 id,pw 담고
-        val requestBody = FormBody.Builder()
-            .add("userId", userId)
-            .add("userPw", userPw)
-            .build()
+        val url = "http://43.202.105.197:8080/api/v1/members/login"
 
-        //요청에는 url주소 넣고
+        val json = JSONObject().apply {
+            put("userId", userId)
+            put("password", userPw)
+        }
+
+        val mediaType = MediaType.parse("application/json")
+        val requestBody = RequestBody.create(mediaType, json.toString())
         val request = Request.Builder()
-            .url(url_login)
+            .url(url)
             .post(requestBody)
             .build()
 
-        //요청을 큐에 넣자
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.d("로그인", "실패했습니다.\n원인 : ${e}")
+                Log.d("로그인", "Failed.\nReason: ${e}")
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.d("로그인", "응답이 존재합니다.\n응답 : ${response}")
                 val responseBody = response.body()?.string()
 
-                // 서버 응답에 따른 처리
                 if (response.isSuccessful) {
                     runOnUiThread {
-                        Log.d("로그인", "성공적 응답입니다.\n응답 : ${response}")
                         val intent = Intent(this@signInActivity, NaviActivity::class.java)
                         startActivity(intent)
                     }
                 } else {
-                    // 실패한 응답 처리
                     runOnUiThread {
-                        // Display a toast message for login failure
-                        //Toast.makeText(this@signInActivity, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        Log.d("로그인", "응답 성공 : 실패.\n응답: ${responseBody}")
 
-                        // Or show an error dialog
                         val alertDialog = AlertDialog.Builder(this@signInActivity)
                             .setTitle("로그인 실패")
-                            .setMessage("로그인에 실패했습니다. 다시 시도해주세요.")
+                            .setMessage("입력하신 정보를 다시 확인해주세요!")
                             .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
                             .create()
                         alertDialog.show()
