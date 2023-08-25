@@ -28,4 +28,6 @@
     <string name="nav_home">家</string>
     <string name="nav_message">灾难通知</string>
     <string name="nav_setting">设定</string>
+    <string name="hint_email">请输入电子邮件</string>
+    <string name="txt_email">输入电子邮件</string>
 </resources>

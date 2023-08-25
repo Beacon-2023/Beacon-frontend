@@ -28,4 +28,6 @@
     <string name="nav_home">溝</string>
     <string name="nav_message">災害通知</string>
     <string name="nav_setting">設定.</string>
+    <string name="hint_email">メール入力してください</string>
+    <string name="txt_email">電子メール入力</string>
 </resources>

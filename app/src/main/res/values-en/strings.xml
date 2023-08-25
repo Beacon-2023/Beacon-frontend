@@ -28,4 +28,6 @@
     <string name="nav_home">Home</string>
     <string name="nav_message">Notification</string>
     <string name="nav_setting">Settings</string>
+    <string name="hint_email">Please enter your email.</string>
+    <string name="txt_email">Enter Email</string>
 </resources>

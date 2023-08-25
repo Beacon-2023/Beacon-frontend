@@ -34,5 +34,7 @@
     <string name="nav_message">재난 알림</string>
     <string name="nav_setting">설정</string>
     <string name="txt_logo1">당신의 안전한\n오늘을 위해</string>
+    <string name="hint_email">이메일을 입력해주세요.</string>
+    <string name="txt_email">이메일 입력</string>
 
 </resources>
