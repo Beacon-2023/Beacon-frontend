@@ -1,13 +1,16 @@
 package com.beacon.settings
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.beacon.R
+import com.beacon.databinding.ActivityStartBinding
 import com.beacon.settings.disaster.setDisasterActivity
 import com.beacon.settings.guildLine.setGuildLineActivity
 import com.beacon.settings.language.setLanguageActivity
@@ -55,6 +58,29 @@ class settingsFragment : Fragment() {
         btnSetGuildLine.setOnClickListener {
             val intent = Intent(context, setGuildLineActivity::class.java)
             startActivity(intent)
+        }
+
+        val btnSetLogout : Button = view.findViewById(R.id.btn_logout)
+        btnSetLogout.setOnClickListener{
+            //sharedPreferences에 저장된 ID,password 값을 null로 변경하고 ActivityStartBinding로 이동할 수 있도록
+            val sharedPreferences = requireContext().getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+
+            // Clear the stored user credentials
+            val editor = sharedPreferences.edit()
+            editor.putString("ID", null)
+            editor.putString("password", null)
+            editor.apply()
+
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setTitle("회원가입 성공")
+                .setMessage("로그인 페이지로 가서 로그인 해주세요!")
+                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
+                    // Navigate to the main activity here
+                    val intent = Intent(requireContext(), ActivityStartBinding::class.java)
+                    startActivity(intent)
+                }
+                .create()
+            alertDialog.show()
         }
     }
 
