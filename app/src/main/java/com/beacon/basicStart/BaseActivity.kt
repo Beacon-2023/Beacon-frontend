@@ -1,6 +1,7 @@
+package com.beacon.basicStart
+
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*

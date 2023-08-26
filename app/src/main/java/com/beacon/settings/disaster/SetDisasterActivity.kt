@@ -1,12 +1,9 @@
 package com.beacon.settings.disaster
 
-import BaseActivity
+import com.beacon.basicStart.BaseActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.beacon.R
 import com.beacon.databinding.ActivitySetDisasterBinding
-import com.beacon.settings.disaster.Data
-import com.beacon.settings.disaster.ListViewAdapter
 
 class setDisasterActivity : BaseActivity() {
     private lateinit var binding : ActivitySetDisasterBinding

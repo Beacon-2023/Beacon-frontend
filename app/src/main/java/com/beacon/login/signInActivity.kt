@@ -1,6 +1,6 @@
 package com.beacon.login
 
-import BaseActivity
+import com.beacon.basicStart.BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

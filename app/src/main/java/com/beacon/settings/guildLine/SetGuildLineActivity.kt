@@ -1,8 +1,7 @@
 package com.beacon.settings.guildLine
 
-import BaseActivity
+import com.beacon.basicStart.BaseActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.beacon.R
 
 class setGuildLineActivity : BaseActivity() {

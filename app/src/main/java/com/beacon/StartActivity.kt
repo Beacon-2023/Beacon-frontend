@@ -1,37 +1,38 @@
 package com.beacon
 
-import BaseActivity
+import com.beacon.basicStart.BaseActivity
 import android.Manifest
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.Response
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
-import java.net.URLEncoder
-import java.util.Locale
 
 class startActivity : BaseActivity() {
     private lateinit var binding: ActivityStartBinding
@@ -47,22 +48,86 @@ class startActivity : BaseActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
+        getPermission()
 
+        // 공유 프리퍼런스를 가져옵니다.
+        val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+        val savedUserID  = sharedPreferences.getString("ID", null)
+        val savedPassword  = sharedPreferences.getString("password", null)
 
+        Log.d("자동 로그인", "ID: $savedUserID PW: $savedPassword")
+        AutoLogin(savedUserID, savedPassword)
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
-
-            val permissions = arrayOf(
-                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.ACCESS_NETWORK_STATE
-            )
-            ActivityCompat.requestPermissions(this, permissions, MY_PERMISSION_ACCESS_ALL)
+        //버튼 리스너
+        binding.btnSignin.setOnClickListener {
+            val intent = Intent(this, signInActivity::class.java)
+            startActivity(intent)
         }
 
+        binding.btnLoginToSignup.setOnClickListener {
+            val intent = Intent(this, signUpActivity::class.java)
+            startActivity(intent)
+        }
 
+        binding.btnNologin.setOnClickListener {
+            val intent = Intent(this, NaviActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun AutoLogin(savedUserId: String?, savedUserPassword: String?) {
+        //비어있지 않다면!
+        if (savedUserId != null && savedUserPassword != null) {
+            Log.d("자동 로그인", "로그인을 시도합니다 ID: $savedUserId PW: $savedUserPassword")
+
+            val client = OkHttpClient()
+
+            val url = "http://43.202.105.197:8080/api/v1/members/login"
+
+            val json = JSONObject().apply {
+                put("userId", savedUserId)
+                put("password", savedUserPassword)
+            }
+
+            val mediaType = MediaType.parse("application/json")
+            val requestBody = RequestBody.create(mediaType, json.toString())
+            val request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("로그인", "Failed.\nReason: ${e}")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val responseBody = response.body()?.string()
+
+                    if (response.isSuccessful) {
+                        runOnUiThread {
+                            val intent = Intent(this@startActivity, NaviActivity::class.java)
+                            startActivity(intent)
+                        }
+                    } else {
+                        runOnUiThread {
+                            Log.d("로그인", "응답 성공 : 실패.\n응답: ${responseBody}")
+
+                            val alertDialog = AlertDialog.Builder(this@startActivity)
+                                .setTitle("로그인 실패")
+                                .setMessage("입력하신 정보를 다시 확인해주세요!")
+                                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                                .create()
+                            alertDialog.show()
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+
+    private fun getPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // Request ignore battery optimizations
             val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
@@ -80,22 +145,6 @@ class startActivity : BaseActivity() {
         val permissionCheck2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         if (permissionCheck2 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), 0)
-        }
-
-        //버튼 리스너
-        binding.btnSignin.setOnClickListener {
-            val intent = Intent(this, signInActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnLoginToSignup.setOnClickListener {
-            val intent = Intent(this, signUpActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnNologin.setOnClickListener {
-            val intent = Intent(this, NaviActivity::class.java)
-            startActivity(intent)
         }
     }
 

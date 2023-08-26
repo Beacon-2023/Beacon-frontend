@@ -22,8 +22,8 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".basicStart.baseActivity"
-            android:exported="false"/>
+            android:name=".basicStart.BaseActivity"
+            android:exported="true" />
         <activity
             android:name=".startActivity"
             android:exported="true">

@@ -1,20 +1,19 @@
 package com.beacon.signup
 
-import BaseActivity
+import android.content.Context
+import android.content.Intent
+import com.beacon.basicStart.BaseActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.beacon.databinding.ActivitySignUpBinding
+import com.beacon.databinding.ActivityStartBinding
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
 import java.io.IOException
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -132,10 +131,31 @@ class signUpActivity : BaseActivity() {
                 if (response.isSuccessful) {
                     runOnUiThread {
                         Log.d("회원가입", "반응 존재 : 성공.\nResponse: ${response}")
-                        // Handle successful sign-up response
+
+                        //<-------------------로컬에 회원가입 내역 저장----------------->
+                        val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+
+                        val alertDialog = AlertDialog.Builder(this@signUpActivity)
+                            .setTitle("로그아웃")
+                            .setMessage("로그인 페이지로 이동합니다!")
+                            .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
+                                // Navigate to the main activity here
+                                val intent = Intent(this@signUpActivity, ActivityStartBinding::class.java)
+                                startActivity(intent)
+                                finish() // Optional, depending on your navigation flow
+                            }
+                            .create()
+                        alertDialog.show()
+
+                        // Use Editor to store values
+                        val editor = sharedPreferences.edit()
+                        editor.putString("ID", userId)
+                        editor.putString("password", userPw)
+                        editor.apply()
                     }
                 }
                 else {
+                    Log.d("회원가입", "반응 존재 : 실패!.\nResponse: ${response}")
                     runOnUiThread {
                         val alertDialog = AlertDialog.Builder(this@signUpActivity)
                             .setTitle("회원가입 실패")
