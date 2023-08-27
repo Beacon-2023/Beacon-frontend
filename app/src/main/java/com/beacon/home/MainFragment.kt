@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.beacon.R
 import com.beacon.databinding.FragmentSettingsBinding
@@ -57,9 +59,38 @@ class mainFragment : Fragment(), OnMapReadyCallback {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    //<---------------네이버지도------------->
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    // 지도에 대한 뷰 역할만을 담당하는 프래그먼트 객체 얻기
+        //<---------------최근 내역에서 찾는 게 맞을 것 같긴해..-------------->
+        val recentCalamity = "서울지역에 태풍 발령"
+        
+        val mainTxt = view.findViewById<TextView>(R.id.txt_mainInformation)
+        mainTxt.setText(recentCalamity)
+        val mainImage = view.findViewById<ImageView>(R.id.img_weather)
+
+        when {
+            "지진" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_earthquake)
+            }
+            "호우" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_rain)
+            }
+            "태풍" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_typhoon)
+            }
+            "민방위" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_war)
+            }
+            "산불" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_buring)
+            }
+            "대설" in recentCalamity -> {
+                mainImage.setImageResource(R.drawable.icon_heavysnow)
+            }
+        }
+
+        //<---------------네이버지도------------->
+        // 지도에 대한 뷰 역할만을 담당하는 프래그먼트 객체 얻기
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
             ?: MapFragment.newInstance().also {

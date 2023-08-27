@@ -14,9 +14,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.beacon.data.AppDatabase
+import com.beacon.data.DataRepository
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType
@@ -72,6 +77,16 @@ class startActivity : BaseActivity() {
         binding.btnNologin.setOnClickListener {
             val intent = Intent(this, NaviActivity::class.java)
             startActivity(intent)
+        }
+
+        val dataDao = AppDatabase.getDatabase(this).dataDao()
+        val dataRepository = DataRepository(dataDao)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val existingData = dataRepository.getAllData()
+            if (existingData.isEmpty()) {
+                dataRepository.insertInitialData()
+            }
         }
     }
 

@@ -4,8 +4,10 @@ import com.beacon.basicStart.BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.beacon.NaviActivity
+import com.beacon.R
 import com.beacon.databinding.ActivitySignInBinding
 import com.beacon.signup.signUpActivity
 import okhttp3.Call

@@ -16,7 +16,7 @@
     <string name="txt_setGuild2">재난 발생 시 사용자가 미리 입력해둔 가이드라인을 제공합니다.</string>
     <string name="txt_signupPhrase">회원가입에 필요한\n정보를 기입해주세요!</string>
     <string name="txt_constraint_Id">6자 이상</string>
-    <string name="txt_constraint_pw">영문자 포함 6자 이상</string>
+    <string name="txt_constraint_pw">비밀번호 입력</string>
     <string name="txt_constraint_confirm_pw">비밀번호 확인</string>
     <string name="setting_message">재난 메시지 관련</string>
     <string name="setting_alram">알림 받을 재난을 선택</string>
@@ -36,5 +36,6 @@
     <string name="txt_logo1">당신의 안전한\n오늘을 위해</string>
     <string name="hint_email">이메일을 입력해주세요.</string>
     <string name="txt_email">이메일 입력</string>
+    <string name="txt_pw_constraint">1개 이상 대소문자와 특수문자를 포함한 8~16</string>
 
 </resources>

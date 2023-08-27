@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.beacon.R
@@ -22,6 +23,7 @@ class setLanguageActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_language_main)
+
 
         // 저장된 언어 코드 불러오기!
         val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
