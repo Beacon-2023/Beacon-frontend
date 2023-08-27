@@ -1,6 +1,7 @@
 package com.beacon.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
@@ -12,9 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.beacon.NaviActivity
 import com.beacon.R
 import com.beacon.databinding.FragmentSettingsBinding
+import com.beacon.settings.guildLine.viewGuildLineActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -62,10 +66,21 @@ class mainFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //<---------------최근 내역에서 찾는 게 맞을 것 같긴해..-------------->
-        val recentCalamity = "서울지역에 태풍 발령"
-        
+        val recentCalamity = "서울지역에 호우 발령"
+
+        //메인 알림 눌렀을 때 -> 가이드라인으로 이동
+        val main_alram = view.findViewById<ConstraintLayout>(R.id.AlarmBar)
+        main_alram.setOnClickListener {
+            val intent = Intent(requireContext(), viewGuildLineActivity::class.java)
+            intent.putExtra("calamity", recentCalamity)
+            startActivity(intent)
+        }
+
+        //메인 알림에 나오는 문구
         val mainTxt = view.findViewById<TextView>(R.id.txt_mainInformation)
         mainTxt.setText(recentCalamity)
+
+        //재난 관련 이미지가 나타난다.
         val mainImage = view.findViewById<ImageView>(R.id.img_weather)
 
         when {

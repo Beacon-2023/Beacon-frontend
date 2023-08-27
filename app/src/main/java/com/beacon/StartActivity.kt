@@ -42,6 +42,7 @@ import java.net.URL
 class startActivity : BaseActivity() {
     private lateinit var binding: ActivityStartBinding
     val MY_PERMISSION_ACCESS_ALL = 100
+    val LOCATION_PERMISSION_REQUEST_CODE = 101
 
     companion object {
         const val DENIED = "denied"
@@ -156,6 +157,16 @@ class startActivity : BaseActivity() {
             )
         }
 
+        // Check and request GPS permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            // Permission already granted
+        }
+
         // 백그라운드 퍼미션
         val permissionCheck2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         if (permissionCheck2 == PackageManager.PERMISSION_DENIED) {
@@ -215,6 +226,23 @@ class startActivity : BaseActivity() {
             return responseBody.toString()
         }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+            } else {
+                // Permission denied
+            }
+        }
+    }
+
     //권한 얻는
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val deniedPermissionList = permissions.filter { !it.value }.map { it.key }

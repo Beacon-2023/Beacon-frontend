@@ -1,7 +1,6 @@
 package com.beacon.settings.disaster
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// 프로필사진(이미지뷰), 이름(텍스트뷰)
-// 이미지를 숫자로 참조하기 위해 int로 받음
-class Data(val profile: Int, val name: String, var ischecked: Int)
-
-class ListViewAdapter(val context: Context, val DataList: ArrayList<Data>) : BaseAdapter() {
+class ListViewAdapter(val context: Context, val DataList: ArrayList<DisasterData>) : BaseAdapter() {
     override fun getCount() = DataList.size
 
     override fun getItem(position: Int) = DataList[position]
@@ -49,7 +44,12 @@ class ListViewAdapter(val context: Context, val DataList: ArrayList<Data>) : Bas
             val dataRepository = DataRepository(dataDao)
 
             CoroutineScope(Dispatchers.IO).launch {
-                dataRepository.updateIsCheckedValue(position+1, 1)
+                if(DataList[position].ischecked == 1){
+                    dataRepository.updateIsCheckedValue(position+1, 1)
+                }
+                else{
+                    dataRepository.updateIsCheckedValue(position+1, 0)
+                }
                 //Log.d("재난", "$position")
             }
 

@@ -36,5 +36,5 @@
         app:layout_constraintStart_toEndOf="@+id/txt_disaster"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012"
-        app:srcCompat="@drawable/icon_check_mark" />
+        app:srcCompat="@drawable/icon_next" />
 </androidx.constraintlayout.widget.ConstraintLayout>
