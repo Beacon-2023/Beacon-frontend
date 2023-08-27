@@ -16,12 +16,12 @@ class setDisasterActivity : BaseActivity() {
     private lateinit var disasterRepository: DataRepository
 
     var DataList = arrayListOf(
-        Data(R.drawable.icon_check_mark, "호우", 0),
-        Data(R.drawable.icon_check_mark, "대설", 1),
-        Data(R.drawable.icon_check_mark, "지진", 0),
-        Data(R.drawable.icon_check_mark, "태풍", 1),
-        Data(R.drawable.icon_check_mark, "산불", 0),
-        Data(R.drawable.icon_check_mark, "민방위", 0),
+        DisasterData(R.drawable.icon_check_mark, "호우", 0),
+        DisasterData(R.drawable.icon_check_mark, "대설", 1),
+        DisasterData(R.drawable.icon_check_mark, "지진", 0),
+        DisasterData(R.drawable.icon_check_mark, "태풍", 1),
+        DisasterData(R.drawable.icon_check_mark, "산불", 0),
+        DisasterData(R.drawable.icon_check_mark, "민방위", 0),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
