@@ -39,15 +39,19 @@ class messageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView
-        viewManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
-        viewAdapter = cardViewAdapter()
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_main)
+        val items = mutableListOf(
+            CardViewItem(R.drawable.icon_rain, "8월 13일 23시 10분", "'서울' 지역에 '폭우' 경보"),
+            CardViewItem(R.drawable.icon_rain, "8월 13일 23시 12분", "'서울' 지역에 '폭우' 경보"),
+            CardViewItem(R.drawable.icon_rain, "8월 13일 23시 13분", "'서울' 지역에 '폭우' 경보"),
+            CardViewItem(R.drawable.icon_rain, "8월 13일 23시 14분", "'서울' 지역에 '폭우' 경보"),
+            CardViewItem(R.drawable.icon_rain, "8월 13일 23시 15분", "'서울' 지역에 '폭우' 경보")
+        )
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview_main).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+        val adapter = CardViewAdapter(items)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     companion object {
