@@ -27,7 +27,7 @@
     <string name="setting_logout">로그아웃</string>
     <string name="message_recent">최근 경보</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="next" translatable="false">Next</string>
+    <string name="next">다음</string>
     <string name="previous" translatable="false">Previous</string>
 
     <string name="nav_home">홈</string>
@@ -36,6 +36,16 @@
     <string name="txt_logo1">당신의 안전한\n오늘을 위해</string>
     <string name="hint_email">이메일을 입력해주세요.</string>
     <string name="txt_email">이메일 입력</string>
-    <string name="txt_pw_constraint">1개 이상 대소문자와 특수문자를 포함한 8~16</string>
+    <string name="txt_pw_constraint">1개 이상 대소문자와 특수문자를 포함한 8-16</string>
+    <string name="txt_click_guild">클릭하면 관련 가이드가 나와요!</string>
+    <string name="basic_rules">기본 수칙</string>
+    <string name="nearby_shelter">최근접 대피소</string>
+    <string name="disas_heavy_rain">호우</string>
+    <string name="disas_heavy_snow">대설</string>
+    <string name="disas_Earthquake">지진</string>
+    <string name="disas_Typhoon">태풍</string>
+    <string name="disas_forest_fires">산불</string>
+    <string name="disas_civil_defense">민방위</string>
+    <string name="custom_guild_sample">휴대폰을 챙기세요\n\n가스불을 끄세요\n\n전기선을 뽑으세요</string>
 
 </resources>

@@ -8,23 +8,22 @@ import com.beacon.settings.disaster.DisasterData
 import com.beacon.settings.disaster.ListViewAdapter
 
 class setGuildLineActivity : BaseActivity() {
-    private lateinit var binding : ActivitySetGuildLineBinding
-    var frameData = arrayListOf(
-        DisasterData(R.drawable.icon_check_mark, "호우", 0),
-        DisasterData(R.drawable.icon_check_mark, "대설", 0),
-        DisasterData(R.drawable.icon_check_mark, "지진", 0),
-        DisasterData(R.drawable.icon_check_mark, "태풍", 0),
-        DisasterData(R.drawable.icon_check_mark, "산불", 0),
-        DisasterData(R.drawable.icon_check_mark, "민방위", 0),
-    )
+    private lateinit var binding: ActivitySetGuildLineBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_guild_line)
         binding = ActivitySetGuildLineBinding.inflate(layoutInflater)
-        var view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        binding.listview.adapter = ListViewAdapter_GulidLine(this@setGuildLineActivity, frameData)
+        val frameData = arrayListOf(
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_heavy_rain), 0),
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_heavy_snow), 0),
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_Earthquake), 0),
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_Typhoon), 0),
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_forest_fires), 0),
+            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_civil_defense), 0)
+        )
+
+        binding.listview.adapter = ListViewAdapter_GulidLine(this, frameData)
     }
 }

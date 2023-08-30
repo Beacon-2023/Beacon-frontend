@@ -26,10 +26,6 @@ class signUpActivity : BaseActivity() {
         var view = binding.root
         setContentView(view)
 
-
-        //var Id = binding.inputId.text.toString()
-        //var pw = binding.inputPw.text.toString()
-
         binding.btnNext.setOnClickListener {
             val userId= binding.inputId.text.toString()
             val userPw= binding.inputPw.text.toString()

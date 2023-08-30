@@ -30,4 +30,16 @@
     <string name="nav_setting">Settings</string>
     <string name="hint_email">Please enter your email.</string>
     <string name="txt_email">Enter Email</string>
+    <string name="next">Next</string>
+    <string name="txt_pw_constraint">8-16 with one or more case and special characters</string>
+    <string name="txt_click_guild">Click to get the relevant guide!</string>
+    <string name="basic_rules">basic rules</string>
+    <string name="nearby_shelter">nearby shelter</string>
+    <string name="disas_heavy_rain">heavy rain</string>
+    <string name="disas_heavy_snow">heavy snow</string>
+    <string name="disas_Earthquake">Earthquake</string>
+    <string name="disas_Typhoon">Typhoon</string>
+    <string name="disas_forest_fires">forest fires</string>
+    <string name="disas_civil_defense">civil defense</string>
+    <string name="custom_guild_sample">Take your cell phone\n\nTurn off the gas\n\nPlease pull out the electrical wire</string>
 </resources>
