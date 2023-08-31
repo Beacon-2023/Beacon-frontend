@@ -30,4 +30,16 @@
     <string name="nav_setting">设定</string>
     <string name="hint_email">请输入电子邮件</string>
     <string name="txt_email">输入电子邮件</string>
+    <string name="next">下一个</string>
+    <string name="txt_pw_constraint">包含1个以上大小写和特殊字符的8-16</string>
+    <string name="txt_click_guild">点击查看相关攻略！</string>
+    <string name="basic_rules">基本规则</string>
+    <string name="nearby_shelter">最近的避难所</string>
+    <string name="disas_heavy_rain">倾盆大雨</string>
+    <string name="disas_heavy_snow">暴雪</string>
+    <string name="disas_Earthquake">地震</string>
+    <string name="disas_Typhoon">台风</string>
+    <string name="disas_forest_fires">森林大火</string>
+    <string name="disas_civil_defense">民防</string>
+    <string name="custom_guild_sample">拿起你的手机\n\n关掉煤气炉\n\n拔掉电源线。</string>
 </resources>

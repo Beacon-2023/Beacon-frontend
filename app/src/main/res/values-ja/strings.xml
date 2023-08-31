@@ -30,4 +30,16 @@
     <string name="nav_setting">設定.</string>
     <string name="hint_email">メール入力してください</string>
     <string name="txt_email">電子メール入力</string>
+    <string name="next">次</string>
+    <string name="txt_pw_constraint">1つ以上の大文字と特殊文字を含む8-16</string>
+    <string name="txt_click_guild">クリックすると関連ガイドが出てきます！</string>
+    <string name="basic_rules">基本ルール</string>
+    <string name="nearby_shelter">最近の避難所</string>
+    <string name="disas_heavy_rain">大雨</string>
+    <string name="disas_heavy_snow">大雪</string>
+    <string name="disas_Earthquake">地震</string>
+    <string name="disas_Typhoon">台風</string>
+    <string name="disas_forest_fires">山火事</string>
+    <string name="disas_civil_defense">民間防衛</string>
+    <string name="custom_guild_sample">携帯電話を持ってください\n\nガスの火を消してください\n\n電線を抜いてください。</string>
 </resources>

@@ -30,4 +30,16 @@
     <string name="nav_setting">การทำ</string>
     <string name="hint_email">กรุณากรอกอีเมลด้วยค่ะ</string>
     <string name="txt_email">ป้อนอีเมล</string>
+    <string name="next">ต่อไป</string>
+    <string name="txt_pw_constraint">8-16 รวมถึงอักษรตัวพิมพ์ใหญ่และตัวพิมพ์เล็กและอักขระพิเศษอย่างน้อยหนึ่งตัว</string>
+    <string name="txt_click_guild">คลิกเพื่อดูคำแนะนำที่เกี่ยวข้อง!</string>
+    <string name="basic_rules">กฎพื้นฐาน</string>
+    <string name="nearby_shelter">ที่พักพิงที่ใกล้ที่สุด</string>
+    <string name="disas_heavy_rain">ฝนตกหนัก</string>
+    <string name="disas_heavy_snow">หิมะตกหนัก</string>
+    <string name="disas_Earthquake">แผ่นดินไหว</string>
+    <string name="disas_Typhoon">ไต้ฝุ่น</string>
+    <string name="disas_forest_fires">ไฟป่า</string>
+    <string name="disas_civil_defense">การป้องกันพลเรือน</string>
+    <string name="custom_guild_sample">หยิบโทรศัพท์มือถือของคุณ\n\nปิดไฟแก๊ส\n\nถอดปลั๊กสายไฟ</string>
 </resources>

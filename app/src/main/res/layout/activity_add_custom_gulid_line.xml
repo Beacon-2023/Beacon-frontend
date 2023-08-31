@@ -41,7 +41,7 @@
         android:layout_height="450dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/border_radius_blank"
-        android:hint="휴대폰을 챙기세요\n\n가스불을 끄세요\n\n전기선을 뽑으세요\n\n가족에게 연락하세요\n\n"
+        android:hint="@string/custom_guild_sample"
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -20,22 +20,22 @@ class AddCustomGulidLineActivity : BaseActivity() {
 
         when (clickedIndex) {
             0 -> {
-                binding.txtSetDiasasterPhrase1.setText("호우 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_heavy_rain)
             }
             1 -> {
-                binding.txtSetDiasasterPhrase1.setText("대설 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_heavy_snow)
             }
             2 -> {
-                binding.txtSetDiasasterPhrase1.setText("지진 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_Earthquake)
             }
             3 -> {
-                binding.txtSetDiasasterPhrase1.setText("태풍 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_Typhoon)
             }
             4 -> {
-                binding.txtSetDiasasterPhrase1.setText("산불 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_forest_fires)
             }
             5 -> {
-                binding.txtSetDiasasterPhrase1.setText("민방위 가이드라인")
+                binding.txtSetDiasasterPhrase1.text = getString(R.string.disas_civil_defense) + " 가이드라인"
             }
         }
     }

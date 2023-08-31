@@ -26,10 +26,6 @@ class signUpActivity : BaseActivity() {
         var view = binding.root
         setContentView(view)
 
-
-        //var Id = binding.inputId.text.toString()
-        //var pw = binding.inputPw.text.toString()
-
         binding.btnNext.setOnClickListener {
             val userId= binding.inputId.text.toString()
             val userPw= binding.inputPw.text.toString()
@@ -47,13 +43,61 @@ class signUpActivity : BaseActivity() {
                 }
             }
             else {
-                checkDuplicate(userId,userPw,userEmail)
+                if(isValidInput(userId, userPw, userEmail)){
+                    checkDuplicate(userId,userPw,userEmail)
+                }
+                else{
+                    val alertDialog = AlertDialog.Builder(this@signUpActivity)
+                        .setTitle("규칙에 맞는 정보가 아닙니다!")
+                        .setMessage("ID(6자 이상), PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
+                        .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                        .create()
+                    alertDialog.show()
+                }
             }
         }
 
         binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
+    }
+
+    fun isValidInput(userId: String, userPw: String, userEmail: String): Boolean {
+        // Check userId: 6 characters or more
+        if (userId.length < 6) {
+            val alertDialog = AlertDialog.Builder(this@signUpActivity)
+                .setTitle("규칙에 맞는 정보가 아닙니다!")
+                .setMessage("ID(6자 이상)")
+                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                .create()
+            alertDialog.show()
+            return false
+        }
+
+        // Check userPw: Is the email format complied with?
+        val emailPattern = "[a-zA-Z0-9._-]*[a-zA-Z]+@[a-zA-Z]+\\.[a-z]+"
+        if (!userPw.matches(emailPattern.toRegex())) {
+            val alertDialog = AlertDialog.Builder   (this@signUpActivity)
+                .setTitle("규칙에 맞는 정보가 아닙니다!")
+                .setMessage("이메일 정보를 다시 확인해주세요!")
+                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                .create()
+            alertDialog.show()
+            return false
+        }
+        
+        // Check userEmail: 8 to 16 characters, including at least 1 uppercase and lowercase letter and special characters
+        val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$"
+        if (!userEmail.matches(passwordPattern.toRegex())) {
+            val alertDialog = AlertDialog.Builder(this@signUpActivity)
+                .setTitle("규칙에 맞는 정보가 아닙니다!")
+                .setMessage("PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
+                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                .create()
+            alertDialog.show()
+            return false
+        }
+        return true
     }
 
     private fun checkDuplicate(userId: String, userPw: String, userEmail: String) {
