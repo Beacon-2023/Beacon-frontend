@@ -19,6 +19,11 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.messaging.FirebaseMessaging
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONObject
 
 class LocationNotificationWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     companion object {
@@ -34,17 +39,52 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
             val location = fetchCurrentLocation()
             if (location != null) {
                 Log.d(TAG, "doWork() 위치 : ${location}")
-                showLocationNotification(location)
+                //showLocationNotification(location)
+                sendLocationToServer(location)
                 Result.success()
             } else {
                 Log.d(TAG, "doWork() 위치 : NULL")
-                showLocationNullNotification()
+                //showLocationNullNotification()
                 Result.failure()
             }
         } catch (e: Exception) {
             Log.d(TAG, "doWork() 위치 : 에러 발생!")
             Result.failure()
         }
+    }
+
+    private fun sendLocationToServer(location: Location): Boolean {
+        val url = "http://43.202.105.197:8080/api/v1/location-token"
+
+        var fcm_tkn = ""
+        val tokenTask = FirebaseMessaging.getInstance().token
+        try {
+            val token = Tasks.await(tokenTask)
+            Log.d("테스트", "Token: $token")
+            fcm_tkn = token
+        } catch (e: Exception) {
+            Log.d("테스트", "Failed to get token: ${e.message}")
+        }
+
+        val json = JSONObject().apply {
+            put("latitude", location.latitude)
+            put("longitude", location.longitude)
+            put("fcmToken", fcm_tkn)
+        }
+
+        val mediaType = MediaType.parse("application/json")
+        val requestBody = RequestBody.create(mediaType, json.toString())
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody)
+            .build()
+
+        Log.d("테스트", "요청: $json")
+        Log.d("테스트", "요청: $request")
+        val httpClient = OkHttpClient()
+        val response = httpClient.newCall(request).execute()
+        Log.d("테스트", "응답: $response")
+        return response.isSuccessful
     }
 
     //<--------------현재 위치 함수---------------->
@@ -76,6 +116,11 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
         } catch (exception: Exception) {
             null
         }
+    }
+
+    private fun getLocationText(location: Location): String {
+        Log.d(TAG, "getLocationText : 위치 체크")
+        return "Latitude: ${location.latitude}, Longitude: ${location.longitude}"
     }
 
     //<--------------위치 알림 발생---------------->
@@ -163,8 +208,5 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 
-    private fun getLocationText(location: Location): String {
-        Log.d(TAG, "getLocationText : 위치 체크")
-        return "Latitude: ${location.latitude}, Longitude: ${location.longitude}"
-    }
+
 }
