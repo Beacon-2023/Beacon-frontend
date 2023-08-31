@@ -29,7 +29,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="next">다음</string>
     <string name="previous" translatable="false">Previous</string>
-
     <string name="nav_home">홈</string>
     <string name="nav_message">재난 알림</string>
     <string name="nav_setting">설정</string>

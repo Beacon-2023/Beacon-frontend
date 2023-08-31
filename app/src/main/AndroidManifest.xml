@@ -69,7 +69,7 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="yr1amg9f5j" />
+            android:value="@string/NAVER_MAP_API_KEY_VALUE" />
 
         <service
             android:name=".service.MyFirebaseMessagingService"
