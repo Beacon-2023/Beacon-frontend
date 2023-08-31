@@ -76,7 +76,7 @@ class signUpActivity : BaseActivity() {
 
         // Check userPw: Is the email format complied with?
         val emailPattern = "[a-zA-Z0-9._-]*[a-zA-Z]+@[a-zA-Z]+\\.[a-z]+"
-        if (!userPw.matches(emailPattern.toRegex())) {
+        if (!userEmail.matches(emailPattern.toRegex())) {
             val alertDialog = AlertDialog.Builder   (this@signUpActivity)
                 .setTitle("규칙에 맞는 정보가 아닙니다!")
                 .setMessage("이메일 정보를 다시 확인해주세요!")
@@ -88,7 +88,7 @@ class signUpActivity : BaseActivity() {
         
         // Check userEmail: 8 to 16 characters, including at least 1 uppercase and lowercase letter and special characters
         val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$"
-        if (!userEmail.matches(passwordPattern.toRegex())) {
+        if (!userPw.matches(passwordPattern.toRegex())) {
             val alertDialog = AlertDialog.Builder(this@signUpActivity)
                 .setTitle("규칙에 맞는 정보가 아닙니다!")
                 .setMessage("PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
@@ -152,7 +152,7 @@ class signUpActivity : BaseActivity() {
         val url = "http://43.202.105.197:8080/api/v1/members"
 
         val json = JSONObject().apply {
-            put("userId", userId)
+            put("userName", userId)
             put("password", userPw)
             put("email", userEmail)
         }
@@ -191,7 +191,7 @@ class signUpActivity : BaseActivity() {
                             .create()
                         alertDialog.show()
 
-                        // Use Editor to store values
+                        //회원정보 저장
                         val editor = sharedPreferences.edit()
                         editor.putString("ID", userId)
                         editor.putString("password", userPw)

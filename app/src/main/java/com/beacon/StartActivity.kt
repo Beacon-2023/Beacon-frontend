@@ -193,7 +193,7 @@ class startActivity : BaseActivity() {
             val url = "http://43.202.105.197:8080/api/v1/members/login"
 
             val json = JSONObject().apply {
-                put("userId", savedUserId)
+                put("userName", savedUserId)
                 put("password", savedUserPassword)
             }
 
