@@ -21,6 +21,7 @@ import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
@@ -30,14 +31,18 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
 import org.json.JSONObject
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import java.net.URLEncoder
 
 class startActivity : BaseActivity() {
     private lateinit var binding: ActivityStartBinding
@@ -54,6 +59,8 @@ class startActivity : BaseActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
+
+        //권한 가져오기
         getPermission()
 
         // 공유 프리퍼런스를 가져옵니다.
@@ -80,6 +87,7 @@ class startActivity : BaseActivity() {
             startActivity(intent)
         }
 
+        //알림 받고 싶은 재난 DB 초기화
         val dataDao = AppDatabase.getDatabase(this).dataDao()
         val dataRepository = DataRepository(dataDao)
 
@@ -87,6 +95,90 @@ class startActivity : BaseActivity() {
             val existingData = dataRepository.getAllData()
             if (existingData.isEmpty()) {
                 dataRepository.insertInitialData()
+            }
+        }
+
+        translateWithNmtApi()
+    }
+
+    private fun translateWithNmtApi() {
+        val clientId = "rEQ9nMHXaly9DJjySccs" // Replace with your application client ID
+        val clientSecret = "dzCeXwa26O" // Replace with your application client secret
+
+        val apiURL = "https://openapi.naver.com/v1/papago/n2mt"
+        val text: String
+        try {
+            text = URLEncoder.encode("파파고 테스트 중입니다.", "UTF-8")
+        } catch (e: UnsupportedEncodingException) {
+            throw RuntimeException("Encoding failed", e)
+        }
+
+        val requestHeaders = mutableMapOf<String, String>()
+        requestHeaders["X-Naver-Client-Id"] = clientId
+        requestHeaders["X-Naver-Client-Secret"] = clientSecret
+
+        // Perform network operation using a coroutine on IO dispatcher
+        GlobalScope.launch(Dispatchers.IO) {
+            val responseBody = post(apiURL, requestHeaders, text)
+            Log.d("번역", responseBody)
+
+            val jsonObject = JSONObject(responseBody)
+            val translatedText = jsonObject.getJSONObject("message")
+                .getJSONObject("result")
+                .getString("translatedText")
+
+            Log.d("번역", translatedText)
+        }
+    }
+
+    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String): String {
+        val con = connect(apiUrl)
+        val postParams = "source=ko&target=en&text=$text" // Source language: English (en) -> Target language: English (en)
+        try {
+            con.requestMethod = "POST"
+            for ((key, value) in requestHeaders) {
+                con.setRequestProperty(key, value)
+            }
+
+            con.doOutput = true
+            DataOutputStream(con.outputStream).use { wr ->
+                wr.write(postParams.toByteArray())
+                wr.flush()
+            }
+
+            val responseCode = con.responseCode
+            return if (responseCode == HttpURLConnection.HTTP_OK) {
+                readBody(con.inputStream)
+            } else {
+                readBody(con.errorStream)
+            }
+        } catch (e: IOException) {
+            throw RuntimeException("API request and response failed", e)
+        } finally {
+            con.disconnect()
+        }
+    }
+
+    private fun connect(apiUrl: String): HttpURLConnection {
+        return try {
+            val url = URL(apiUrl)
+            url.openConnection() as HttpURLConnection
+        } catch (e: MalformedURLException) {
+            throw RuntimeException("The API URL is invalid: $apiUrl", e)
+        } catch (e: IOException) {
+            throw RuntimeException("Connection failed: $apiUrl", e)
+        }
+    }
+
+    private fun readBody(body: InputStream): String {
+        InputStreamReader(body).use { streamReader ->
+            BufferedReader(streamReader).use { lineReader ->
+                val responseBody = StringBuilder()
+                var line: String?
+                while (lineReader.readLine().also { line = it } != null) {
+                    responseBody.append(line)
+                }
+                return responseBody.toString()
             }
         }
     }
@@ -174,58 +266,7 @@ class startActivity : BaseActivity() {
         }
     }
 
-    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String): String {
-        val con = connect(apiUrl)
-        val postParams = "source=ko&target=en&text=$text" // Source language: Korean (ko) -> Target language: English (en)
-        try {
-            con.requestMethod = "POST"
-            for ((key, value) in requestHeaders) {
-                con.setRequestProperty(key, value)
-            }
 
-            con.doOutput = true
-            DataOutputStream(con.outputStream).use { wr ->
-                wr.write(postParams.toByteArray())
-                wr.flush()
-            }
-
-            val responseCode = con.responseCode
-            return if (responseCode == HttpURLConnection.HTTP_OK) { // normal response
-                readBody(con.inputStream)
-            } else { // error response
-                readBody(con.errorStream)
-            }
-        } catch (e: IOException) {
-            throw RuntimeException("API request and response failed", e)
-        } finally {
-            con.disconnect()
-        }
-    }
-
-    private fun connect(apiUrl: String): HttpURLConnection {
-        return try {
-            val url = URL(apiUrl)
-            url.openConnection() as HttpURLConnection
-        } catch (e: MalformedURLException) {
-            throw RuntimeException("The API URL is invalid. : $apiUrl", e)
-        } catch (e: IOException) {
-            throw RuntimeException("Connection failed: $apiUrl", e)
-        }
-    }
-
-    private fun readBody(body: InputStream): String {
-        val streamReader = InputStreamReader(body)
-        BufferedReader(streamReader).use { lineReader ->
-            val responseBody = StringBuilder()
-
-            var line: String?
-            while (lineReader.readLine().also { line = it } != null) {
-                responseBody.append(line)
-            }
-
-            return responseBody.toString()
-        }
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
