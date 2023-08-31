@@ -19,6 +19,8 @@ import com.beacon.data.DataRepository
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
 import com.beacon.signup.signUpActivity
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -87,18 +89,54 @@ class startActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        //알림 받고 싶은 재난 DB 초기화
+        //알림 받고 싶은 재난 DB 초기화 & 첫 진입 시 토큰 서버에 전송
         val dataDao = AppDatabase.getDatabase(this).dataDao()
         val dataRepository = DataRepository(dataDao)
 
         CoroutineScope(Dispatchers.IO).launch {
+            sendToken()
             val existingData = dataRepository.getAllData()
             if (existingData.isEmpty()) {
                 dataRepository.insertInitialData()
+
             }
         }
 
+        //PAPAGO API
         translateWithNmtApi()
+    }
+
+    private fun sendToken() {
+        Log.d("테스트", "토큰 집어넣기 실행")
+        val url = "http://43.202.105.197:8080/api/v1/token"
+
+        var fcm_tkn = ""
+        val tokenTask = FirebaseMessaging.getInstance().token
+        try {
+            val token = Tasks.await(tokenTask)
+            Log.d("테스트", "Token: $token")
+            fcm_tkn = token
+        } catch (e: Exception) {
+            Log.d("테스트", "Failed to get token: ${e.message}")
+        }
+
+        val json = JSONObject().apply {
+            put("token", fcm_tkn)
+            put("userName", "temp")
+        }
+
+        val mediaType = MediaType.parse("application/json")
+        val requestBody = RequestBody.create(mediaType, json.toString())
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody)
+            .build()
+
+        Log.d("테스트", "요청: $json")
+        Log.d("테스트", "요청: $request")
+        val httpClient = OkHttpClient()
+        val response = httpClient.newCall(request).execute()
+        Log.d("테스트", "응답: $response")
     }
 
     private fun translateWithNmtApi() {
