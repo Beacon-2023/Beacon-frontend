@@ -94,7 +94,15 @@ class startActivity : BaseActivity() {
         val dataRepository = DataRepository(dataDao)
 
         CoroutineScope(Dispatchers.IO).launch {
-            sendToken()
+            //<--------ID 저장 여부에 따른 토큰 전송--------->
+            if(savedUserID == null){
+                Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
+                sendToken("")
+            } else{
+                Log.d("테스트", "[ID + 토큰]")
+                sendToken(savedUserID)
+            }
+
             val existingData = dataRepository.getAllData()
             if (existingData.isEmpty()) {
                 dataRepository.insertInitialData()
@@ -106,7 +114,7 @@ class startActivity : BaseActivity() {
         translateWithNmtApi()
     }
 
-    private fun sendToken() {
+    private fun sendToken(ID : String) {
         Log.d("테스트", "토큰 집어넣기 실행")
         val url = "http://43.202.105.197:8080/api/v1/token"
 
@@ -122,7 +130,7 @@ class startActivity : BaseActivity() {
 
         val json = JSONObject().apply {
             put("token", fcm_tkn)
-            put("userName", "temp")
+            put("userName", ID)
         }
 
         val mediaType = MediaType.parse("application/json")
