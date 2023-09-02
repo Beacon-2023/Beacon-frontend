@@ -23,15 +23,26 @@ import java.io.IOException
 
 class signInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
+    var isCheckedAuto = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         var view = binding.root
+
         setContentView(view)
 
         binding.btnLoginToSignup.setOnClickListener{
             val intent = Intent(this, signUpActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.isCheckedAutoLogin.setOnCheckedChangeListener{ _, isChecked ->
+            if(isChecked) {
+                isCheckedAuto = 1
+            }else{
+                isCheckedAuto = 0
+            }
         }
 
         //로그인 처리 로직 구현하기
@@ -58,7 +69,7 @@ class signInActivity : BaseActivity() {
 
 
     private fun loginUser(userId: String, userPw: String) {
-        Log.d("로그인", "로그인을 시도합니다 ID: $userId PW: $userPw Email: $userPw")
+        Log.d("로그인", "로그인을 시도합니다 ID: $userId PW: $userPw")
 
         val client = OkHttpClient()
 
@@ -88,18 +99,20 @@ class signInActivity : BaseActivity() {
                     runOnUiThread {
                         //<-------------------로컬에 회원가입 내역 저장----------------->
                         //[ADD] : 자동 로그인이 체크 여부 확인!
-                        val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("ID", userId)
-                        editor.putString("password", userPw)
-                        editor.apply()
-
+                        if(isCheckedAuto == 1){
+                            Log.d("로그인", "[자동 로그인] : O")
+                            val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("ID", userId)
+                            editor.putString("password", userPw)
+                            editor.apply()
+                        }
                         val intent = Intent(this@signInActivity, NaviActivity::class.java)
                         startActivity(intent)
                     }
                 } else {
                     runOnUiThread {
-                        Log.d("로그인", "응답 성공 : 실패.\n응답: ${responseBody}")
+                        Log.d("로그인", "[실패] 응답 존재\n응답: ${responseBody}")
 
                         val alertDialog = AlertDialog.Builder(this@signInActivity)
                             .setTitle("로그인 실패")

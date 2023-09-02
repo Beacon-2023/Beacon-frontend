@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +22,16 @@
         android:theme="@style/Theme.Beacon"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".startActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".settings.guildLine.viewGuildLineActivity"
             android:exported="false" />
@@ -29,19 +40,12 @@
             android:exported="false" />
         <activity
             android:name=".basicStart.BaseActivity"
-            android:exported="true" />
-        <activity
-            android:name=".startActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true"
+            />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".NaviActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".settings.language.setLanguageActivity"
             android:exported="false" />
@@ -79,4 +83,5 @@
             </intent-filter>
         </service>
     </application>
+
 </manifest>
