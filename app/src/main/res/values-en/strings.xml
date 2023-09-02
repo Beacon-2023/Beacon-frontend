@@ -10,7 +10,7 @@
     <string name="hint_pw">Input PW</string>
     <string name="txt_signup">SignUp</string>
     <string name="txt_setDiasaster1">Choose disaster</string>
-    <string name="txt_setDiasaster2"><![CDATA[If you choose disaster\nwhen disaster occurs send alram]]></string>
+    <string name="txt_setDiasaster2"><![CDATA[If you choose disaster\nwhen disaster occurs\nsend alram]]></string>
     <string name="txt_setGuild">Custom GuildLine</string>
     <string name="txt_setGuild2"><![CDATA[when disaster occurs priovides guildline was written by user]]></string>
     <string name="txt_signupPhrase">Please fill out the information required to sign up!</string>
@@ -18,8 +18,8 @@
     <string name="txt_constraint_pw">6 or more characters including English characters</string>
     <string name="txt_constraint_confirm_pw">Confirm password</string>
     <string name="setting_message">Disaster messages</string>
-    <string name="setting_alram">Select a disaster to be notified</string>
-    <string name="setting_language">Language Settings</string>
+    <string name="setting_alram">Select a disaster\nto be notified</string>
+    <string name="setting_language">Language settings</string>
     <string name="setting_guildline">Guideline</string>
     <string name="setting_custom_guildline">Apply Custom Guidelines</string>
     <string name="setting_userInfor">User Information</string>
@@ -42,4 +42,5 @@
     <string name="disas_forest_fires">forest fires</string>
     <string name="disas_civil_defense">civil defense</string>
     <string name="custom_guild_sample">Take your cell phone\n\nTurn off the gas\n\nPlease pull out the electrical wire</string>
+    <string name="check_autoLogin">Please check if you want\nautomatic login!</string>
 </resources>

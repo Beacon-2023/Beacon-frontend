@@ -13,7 +13,7 @@
     <string name="txt_setDiasaster2">เลือกภัยพิบัติที่ต้องการแจ้งเตือน\n ส่งการแจ้งเตือนเมื่อเกิดภัยพิบัติค่ะ</string>
     <string name="txt_setGuild">ตั้งค่าการเตือนภัยพิบัติ</string>
     <string name="txt_setGuild2">ให้คำแนะนำที่คุณป้อนไว้ล่วงหน้าในกรณีที่เกิดภัยพิบัติ</string>
-    <string name="txt_signupPhrase">ที่จำเป็นสำหรับการสมัครสมาชิก\n กรุณากรอกข้อมูลค่ะ!</string>
+    <string name="txt_signupPhrase">ที่จำเป็นสำหรับการสมัครส\nมาชิกกรุณากรอกข้อมูลค่ะ!</string>
     <string name="txt_constraint_Id">มากกว่า 6 ตัวอักษร</string>
     <string name="txt_constraint_pw">รวมตัวอักษรภาษาอังกฤษมากกว่า 6 ตัวอักษร</string>
     <string name="txt_constraint_confirm_pw">ยืนยันรหัสผ่าน</string>
@@ -31,7 +31,7 @@
     <string name="hint_email">กรุณากรอกอีเมลด้วยค่ะ</string>
     <string name="txt_email">ป้อนอีเมล</string>
     <string name="next">ต่อไป</string>
-    <string name="txt_pw_constraint">8-16 รวมถึงอักษรตัวพิมพ์ใหญ่และตัวพิมพ์เล็กและอักขระพิเศษอย่างน้อยหนึ่งตัว</string>
+    <string name="txt_pw_constraint">8-16 รวมถึงอักษรตัวพิมพ์ใ\nหญ่และตัวพิมพ์เล็กและอักขระพ\nิเศษอย่างน้อยหนึ่งตัว</string>
     <string name="txt_click_guild">คลิกเพื่อดูคำแนะนำที่เกี่ยวข้อง!</string>
     <string name="basic_rules">กฎพื้นฐาน</string>
     <string name="nearby_shelter">ที่พักพิงที่ใกล้ที่สุด</string>
@@ -42,4 +42,5 @@
     <string name="disas_forest_fires">ไฟป่า</string>
     <string name="disas_civil_defense">การป้องกันพลเรือน</string>
     <string name="custom_guild_sample">หยิบโทรศัพท์มือถือของคุณ\n\nปิดไฟแก๊ส\n\nถอดปลั๊กสายไฟ</string>
+    <string name="check_autoLogin">กรุณาตรวจสอบหากต้องการล็อกอินอัตโนมัติ!</string>
 </resources>

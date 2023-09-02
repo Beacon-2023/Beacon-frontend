@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.beacon.R
@@ -42,19 +43,19 @@ class settingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 버튼에 OnClickListener 설정
-        val btnSetDisaster: Button = view.findViewById(R.id.btn_setDisaster)
+        val btnSetDisaster: TextView = view.findViewById(R.id.btn_setDisaster)
         btnSetDisaster.setOnClickListener {
             val intent = Intent(context, setDisasterActivity::class.java)
             startActivity(intent)
         }
 
-        val btnSetLanguage: Button = view.findViewById(R.id.btn_setLanguage)
+        val btnSetLanguage: TextView = view.findViewById(R.id.btn_setLanguage)
         btnSetLanguage.setOnClickListener {
             val intent = Intent(context, setLanguageActivity::class.java)
             startActivity(intent)
         }
 
-        val btnSetGuildLine: Button = view.findViewById(R.id.btn_setGuildLine)
+        val btnSetGuildLine: TextView = view.findViewById(R.id.btn_setGuildLine)
         btnSetGuildLine.setOnClickListener {
             val intent = Intent(context, setGuildLineActivity::class.java)
             startActivity(intent)

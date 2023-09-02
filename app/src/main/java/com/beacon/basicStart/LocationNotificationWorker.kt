@@ -34,21 +34,21 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
 
     override fun doWork(): Result {
         Log.d("테스트", "==================================================")
-        Log.d(TAG, "doWork() started")
+        Log.d(TAG, "workManage : doWork() started")
         return try {
             val location = fetchCurrentLocation()
             if (location != null) {
-                Log.d(TAG, "doWork() 위치 : ${location}")
+                Log.d(TAG, "workManage : 위치 : ${location}")
                 //showLocationNotification(location)
                 sendLocationToServer(location)
                 Result.success()
             } else {
-                Log.d(TAG, "doWork() 위치 : NULL")
+                Log.d(TAG, "workManage : 위치 : NULL")
                 //showLocationNullNotification()
                 Result.failure()
             }
         } catch (e: Exception) {
-            Log.d(TAG, "doWork() 위치 : 에러 발생!")
+            Log.d(TAG, "workManage : 실패")
             Result.failure()
         }
     }
@@ -80,8 +80,8 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
             .post(requestBody)
             .build()
 
-        Log.d("테스트", "요청: $json")
-        Log.d("테스트", "요청: $request")
+        Log.d("테스트", "요청 값: $json")
+        Log.d("테스트", "요청 body: $request")
         val httpClient = OkHttpClient()
         val response = httpClient.newCall(request).execute()
         Log.d("테스트", "응답: $response")

@@ -63,18 +63,18 @@
         app:layout_constraintVertical_bias="0.783" />
 
     <TextView
+        android:id="@+id/txt_autoLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_autoLogin"
-        android:text="자동 로그인을 원하시면 체크해주세요!"
-        android:textSize="16dp"
         android:fontFamily="@font/fontlight"
+        android:text="@string/check_autoLogin"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/isCheckedAutoLogin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77" />
+        app:layout_constraintVertical_bias="0.768" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signin"

@@ -42,4 +42,5 @@
     <string name="disas_forest_fires">山火事</string>
     <string name="disas_civil_defense">民間防衛</string>
     <string name="custom_guild_sample">携帯電話を持ってください\n\nガスの火を消してください\n\n電線を抜いてください。</string>
+    <string name="check_autoLogin">自動ログインをご希望の場合はチェ\nクしてください！</string>
 </resources>

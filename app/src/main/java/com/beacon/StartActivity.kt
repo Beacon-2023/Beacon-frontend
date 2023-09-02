@@ -98,11 +98,11 @@ class startActivity : BaseActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 //<--------ID 저장 여부에 따른 토큰 전송--------->
                 if(savedUserID == null){
-                    Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
-                    sendToken("")
+                    //Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
+                    //sendToken("")
                 } else{
-                    Log.d("테스트", "[ID + 토큰] ${savedUserID}")
-                    sendToken(savedUserID)
+                    //Log.d("테스트", "[ID + 토큰] ${savedUserID}")
+                    //sendToken(savedUserID)
                 }
 
                 //DB가 비어있는 첫 접속 => DB 세팅

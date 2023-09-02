@@ -46,5 +46,6 @@
     <string name="disas_forest_fires">산불</string>
     <string name="disas_civil_defense">민방위</string>
     <string name="custom_guild_sample">휴대폰을 챙기세요\n\n가스불을 끄세요\n\n전기선을 뽑으세요</string>
+    <string name="check_autoLogin">자동 로그인을 원하시면 체크해주세요!</string>
 
 </resources>
