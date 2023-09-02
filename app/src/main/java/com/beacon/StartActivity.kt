@@ -97,12 +97,13 @@ class startActivity : BaseActivity() {
             //<--------ID 저장 여부에 따른 토큰 전송--------->
             if(savedUserID == null){
                 Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
-                sendToken("")
+                //sendToken("")
             } else{
-                Log.d("테스트", "[ID + 토큰]")
-                sendToken(savedUserID)
+                Log.d("테스트", "[ID + 토큰] ${savedUserID}")
+                //sendToken(savedUserID)
             }
 
+            //DB가 비어있는 첫 접속 => DB 세팅
             val existingData = dataRepository.getAllData()
             if (existingData.isEmpty()) {
                 dataRepository.insertInitialData()

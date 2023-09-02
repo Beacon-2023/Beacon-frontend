@@ -71,9 +71,10 @@ class settingsFragment : Fragment() {
             editor.putString("password", null)
             editor.apply()
 
+            //API요청해야함..로그아웃!
             val alertDialog = AlertDialog.Builder(requireContext())
-                .setTitle("회원가입 성공")
-                .setMessage("로그인 페이지로 가서 로그인 해주세요!")
+                .setTitle("로그아웃 성공")
+                .setMessage("메인페이지로 이동합니다!")
                 .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
                     // Navigate to the main activity here
                     val intent = Intent(requireContext(), ActivityStartBinding::class.java)

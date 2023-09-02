@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.beacon.databinding.ActivitySignUpBinding
 import com.beacon.databinding.ActivityStartBinding
+import com.beacon.login.signInActivity
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -75,7 +76,7 @@ class signUpActivity : BaseActivity() {
         }
 
         // Check userPw: Is the email format complied with?
-        val emailPattern = "[a-zA-Z0-9._-]*[a-zA-Z]+@[a-zA-Z]+\\.[a-z]+"
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.[a-z]+"
         if (!userEmail.matches(emailPattern.toRegex())) {
             val alertDialog = AlertDialog.Builder   (this@signUpActivity)
                 .setTitle("규칙에 맞는 정보가 아닙니다!")
@@ -180,22 +181,18 @@ class signUpActivity : BaseActivity() {
                         val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
 
                         val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                            .setTitle("로그아웃")
+                            .setTitle("회원가입 성공!")
                             .setMessage("로그인 페이지로 이동합니다!")
                             .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
                                 // Navigate to the main activity here
-                                val intent = Intent(this@signUpActivity, ActivityStartBinding::class.java)
+                                val intent = Intent(this@signUpActivity, signInActivity::class.java)
                                 startActivity(intent)
                                 finish() // Optional, depending on your navigation flow
                             }
                             .create()
                         alertDialog.show()
 
-                        //회원정보 저장
-                        val editor = sharedPreferences.edit()
-                        editor.putString("ID", userId)
-                        editor.putString("password", userPw)
-                        editor.apply()
+
                     }
                 }
                 else {

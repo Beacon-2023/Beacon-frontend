@@ -1,5 +1,6 @@
 package com.beacon.login
 
+import android.content.Context
 import com.beacon.basicStart.BaseActivity
 import android.content.Intent
 import android.os.Bundle
@@ -85,6 +86,14 @@ class signInActivity : BaseActivity() {
 
                 if (response.isSuccessful) {
                     runOnUiThread {
+                        //<-------------------로컬에 회원가입 내역 저장----------------->
+                        //[ADD] : 자동 로그인이 체크 여부 확인!
+                        val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("ID", userId)
+                        editor.putString("password", userPw)
+                        editor.apply()
+
                         val intent = Intent(this@signInActivity, NaviActivity::class.java)
                         startActivity(intent)
                     }

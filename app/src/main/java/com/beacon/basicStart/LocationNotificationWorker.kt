@@ -68,6 +68,7 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
 
         val json = JSONObject().apply {
             put("latitude", location.latitude)
+            //
             put("longitude", location.longitude)
             put("fcmToken", fcm_tkn)
         }

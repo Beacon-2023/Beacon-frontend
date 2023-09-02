@@ -94,6 +94,7 @@ class StartApplication : Application() {
         }
     }
 
+
     fun getCurrentLocale(context: Context) {
         val locale: Locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             context.resources.configuration.locales[0]
