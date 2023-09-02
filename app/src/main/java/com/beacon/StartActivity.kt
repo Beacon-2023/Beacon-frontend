@@ -48,7 +48,6 @@ import java.net.URLEncoder
 
 class startActivity : BaseActivity() {
     private lateinit var binding: ActivityStartBinding
-    val MY_PERMISSION_ACCESS_ALL = 100
     val LOCATION_PERMISSION_REQUEST_CODE = 101
 
     companion object {
@@ -58,61 +57,71 @@ class startActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStartBinding.inflate(layoutInflater)
-        var view = binding.root
-        setContentView(view)
-
-        //권한 가져오기
-        getPermission()
 
         // 공유 프리퍼런스를 가져옵니다.
         val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
         val savedUserID  = sharedPreferences.getString("ID", null)
         val savedPassword  = sharedPreferences.getString("password", null)
 
-        Log.d("자동 로그인", "ID: $savedUserID PW: $savedPassword")
-        AutoLogin(savedUserID, savedPassword)
-
-        //버튼 리스너
-        binding.btnSignin.setOnClickListener {
-            val intent = Intent(this, signInActivity::class.java)
-            startActivity(intent)
+        if(savedUserID != null) {
+            AutoLogin(savedUserID, savedPassword)
         }
 
-        binding.btnLoginToSignup.setOnClickListener {
-            val intent = Intent(this, signUpActivity::class.java)
-            startActivity(intent)
-        }
+        else{
+            binding = ActivityStartBinding.inflate(layoutInflater)
+            var view = binding.root
+            setContentView(view)
 
-        binding.btnNologin.setOnClickListener {
-            val intent = Intent(this, NaviActivity::class.java)
-            startActivity(intent)
-        }
+            //권한 가져오기
+            getPermission()
 
-        //알림 받고 싶은 재난 DB 초기화 & 첫 진입 시 토큰 서버에 전송
-        val dataDao = AppDatabase.getDatabase(this).dataDao()
-        val dataRepository = DataRepository(dataDao)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            //<--------ID 저장 여부에 따른 토큰 전송--------->
-            if(savedUserID == null){
-                Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
-                //sendToken("")
-            } else{
-                Log.d("테스트", "[ID + 토큰] ${savedUserID}")
-                //sendToken(savedUserID)
+            //버튼 리스너
+            binding.btnSignin.setOnClickListener {
+                val intent = Intent(this, signInActivity::class.java)
+                startActivity(intent)
             }
 
-            //DB가 비어있는 첫 접속 => DB 세팅
-            val existingData = dataRepository.getAllData()
-            if (existingData.isEmpty()) {
-                dataRepository.insertInitialData()
-
+            binding.btnLoginToSignup.setOnClickListener {
+                val intent = Intent(this, signUpActivity::class.java)
+                startActivity(intent)
             }
+
+            binding.btnNologin.setOnClickListener {
+                val intent = Intent(this, NaviActivity::class.java)
+                startActivity(intent)
+            }
+
+            //알림 받고 싶은 재난 DB 초기화 & 첫 진입 시 토큰 서버에 전송
+            val dataDao = AppDatabase.getDatabase(this).dataDao()
+            val dataRepository = DataRepository(dataDao)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                //<--------ID 저장 여부에 따른 토큰 전송--------->
+                if(savedUserID == null){
+                    Log.d("테스트", "[빈 ID] : 토큰만 전송합니다.")
+                    sendToken("")
+                } else{
+                    Log.d("테스트", "[ID + 토큰] ${savedUserID}")
+                    sendToken(savedUserID)
+                }
+
+                //DB가 비어있는 첫 접속 => DB 세팅
+                val existingData = dataRepository.getAllData()
+                if (existingData.isEmpty()) {
+                    dataRepository.insertInitialData()
+
+                }
+            }
+
+            //PAPAGO API
+            Log.d("번역", "오늘의 테스트")
+            translateWithNmtApi("오늘의 테스트", "en")
+            translateWithNmtApi("오늘의 테스트", "ja")
+            translateWithNmtApi("오늘의 테스트", "th")
+            translateWithNmtApi("오늘의 테스트", "zh-CN")
         }
 
-        //PAPAGO API
-        translateWithNmtApi()
+
     }
 
     private fun sendToken(ID : String) {
@@ -146,88 +155,6 @@ class startActivity : BaseActivity() {
         val httpClient = OkHttpClient()
         val response = httpClient.newCall(request).execute()
         Log.d("테스트", "응답: $response")
-    }
-
-    private fun translateWithNmtApi() {
-        val clientId = "rEQ9nMHXaly9DJjySccs" // Replace with your application client ID
-        val clientSecret = "dzCeXwa26O" // Replace with your application client secret
-
-        val apiURL = "https://openapi.naver.com/v1/papago/n2mt"
-        val text: String
-        try {
-            text = URLEncoder.encode("파파고 테스트 중입니다.", "UTF-8")
-        } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException("Encoding failed", e)
-        }
-
-        val requestHeaders = mutableMapOf<String, String>()
-        requestHeaders["X-Naver-Client-Id"] = clientId
-        requestHeaders["X-Naver-Client-Secret"] = clientSecret
-
-        // Perform network operation using a coroutine on IO dispatcher
-        GlobalScope.launch(Dispatchers.IO) {
-            val responseBody = post(apiURL, requestHeaders, text)
-            Log.d("번역", responseBody)
-
-            val jsonObject = JSONObject(responseBody)
-            val translatedText = jsonObject.getJSONObject("message")
-                .getJSONObject("result")
-                .getString("translatedText")
-
-            Log.d("번역", translatedText)
-        }
-    }
-
-    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String): String {
-        val con = connect(apiUrl)
-        val postParams = "source=ko&target=en&text=$text" // Source language: English (en) -> Target language: English (en)
-        try {
-            con.requestMethod = "POST"
-            for ((key, value) in requestHeaders) {
-                con.setRequestProperty(key, value)
-            }
-
-            con.doOutput = true
-            DataOutputStream(con.outputStream).use { wr ->
-                wr.write(postParams.toByteArray())
-                wr.flush()
-            }
-
-            val responseCode = con.responseCode
-            return if (responseCode == HttpURLConnection.HTTP_OK) {
-                readBody(con.inputStream)
-            } else {
-                readBody(con.errorStream)
-            }
-        } catch (e: IOException) {
-            throw RuntimeException("API request and response failed", e)
-        } finally {
-            con.disconnect()
-        }
-    }
-
-    private fun connect(apiUrl: String): HttpURLConnection {
-        return try {
-            val url = URL(apiUrl)
-            url.openConnection() as HttpURLConnection
-        } catch (e: MalformedURLException) {
-            throw RuntimeException("The API URL is invalid: $apiUrl", e)
-        } catch (e: IOException) {
-            throw RuntimeException("Connection failed: $apiUrl", e)
-        }
-    }
-
-    private fun readBody(body: InputStream): String {
-        InputStreamReader(body).use { streamReader ->
-            BufferedReader(streamReader).use { lineReader ->
-                val responseBody = StringBuilder()
-                var line: String?
-                while (lineReader.readLine().also { line = it } != null) {
-                    responseBody.append(line)
-                }
-                return responseBody.toString()
-            }
-        }
     }
 
     private fun AutoLogin(savedUserId: String?, savedUserPassword: String?) {
@@ -281,6 +208,87 @@ class startActivity : BaseActivity() {
         }
     }
 
+    private fun translateWithNmtApi(value : String, toLanguage : String) {
+        val clientId = "rEQ9nMHXaly9DJjySccs" // Replace with your application client ID
+        val clientSecret = "dzCeXwa26O" // Replace with your application client secret
+
+        val apiURL = "https://openapi.naver.com/v1/papago/n2mt"
+        val text: String
+        try {
+            text = URLEncoder.encode(value, "UTF-8")
+        } catch (e: UnsupportedEncodingException) {
+            throw RuntimeException("Encoding failed", e)
+        }
+
+        val requestHeaders = mutableMapOf<String, String>()
+        requestHeaders["X-Naver-Client-Id"] = clientId
+        requestHeaders["X-Naver-Client-Secret"] = clientSecret
+
+        // Perform network operation using a coroutine on IO dispatcher
+        GlobalScope.launch(Dispatchers.IO) {
+            val responseBody = post(apiURL, requestHeaders, text, toLanguage)
+            Log.d("번역", responseBody)
+
+            val jsonObject = JSONObject(responseBody)
+            val translatedText = jsonObject.getJSONObject("message")
+                .getJSONObject("result")
+                .getString("translatedText")
+
+            Log.d("번역", translatedText)
+        }
+    }
+
+    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String, toLanguage : String): String {
+        val con = connect(apiUrl)
+        val postParams = "source=ko&target=$toLanguage&text=$text" // <-------여기서 번역 어떻게 할 지 !!!!------>
+        try {
+            con.requestMethod = "POST"
+            for ((key, value) in requestHeaders) {
+                con.setRequestProperty(key, value)
+            }
+
+            con.doOutput = true
+            DataOutputStream(con.outputStream).use { wr ->
+                wr.write(postParams.toByteArray())
+                wr.flush()
+            }
+
+            val responseCode = con.responseCode
+            return if (responseCode == HttpURLConnection.HTTP_OK) {
+                readBody(con.inputStream)
+            } else {
+                readBody(con.errorStream)
+            }
+        } catch (e: IOException) {
+            throw RuntimeException("API request and response failed", e)
+        } finally {
+            con.disconnect()
+        }
+    }
+
+    private fun connect(apiUrl: String): HttpURLConnection {
+        return try {
+            val url = URL(apiUrl)
+            url.openConnection() as HttpURLConnection
+        } catch (e: MalformedURLException) {
+            throw RuntimeException("The API URL is invalid: $apiUrl", e)
+        } catch (e: IOException) {
+            throw RuntimeException("Connection failed: $apiUrl", e)
+        }
+    }
+
+    private fun readBody(body: InputStream): String {
+        InputStreamReader(body).use { streamReader ->
+            BufferedReader(streamReader).use { lineReader ->
+                val responseBody = StringBuilder()
+                var line: String?
+                while (lineReader.readLine().also { line = it } != null) {
+                    responseBody.append(line)
+                }
+                return responseBody.toString()
+            }
+        }
+    }
 
     private fun getPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -351,5 +359,4 @@ class startActivity : BaseActivity() {
             }
         }
     }
-
 }

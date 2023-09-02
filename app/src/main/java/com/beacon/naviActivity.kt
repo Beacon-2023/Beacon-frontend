@@ -18,6 +18,7 @@ class NaviActivity : BaseActivity() {
     private lateinit var binding : ActivityNaviBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Beacon)
         super.onCreate(savedInstanceState)
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)

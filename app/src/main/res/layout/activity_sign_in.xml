@@ -22,35 +22,59 @@
 
     <EditText
         android:id="@+id/input_id"
-        android:inputType="text"
-        android:maxLines="1"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
         android:hint="@string/hint_id"
+        android:inputType="text"
+        android:maxLines="1"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintVertical_bias="0.587" />
 
     <EditText
         android:id="@+id/input_pw"
-        android:inputType="textPassword"
-        android:maxLines="1"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:background="@drawable/border_radius_blank"
         android:hint="@string/hint_pw"
+        android:inputType="textPassword"
+        android:maxLines="1"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.755" />
+        app:layout_constraintVertical_bias="0.691" />
+
+    <CheckBox
+        android:id="@+id/isCheckedAutoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_autoLogin"
+        android:text="자동 로그인을 원하시면 체크해주세요!"
+        android:textSize="16dp"
+        android:fontFamily="@font/fontlight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signin"
@@ -66,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_loginToSignup"
@@ -81,7 +105,7 @@
         app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.975" />
 
     <TextView
         android:id="@+id/txt_startPhrase2"
