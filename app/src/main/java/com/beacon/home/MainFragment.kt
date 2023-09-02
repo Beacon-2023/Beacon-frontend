@@ -66,7 +66,7 @@ class mainFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //<---------------최근 내역에서 찾는 게 맞을 것 같긴해..-------------->
-        val recentCalamity = "서울지역에 호우 발령"
+        val recentCalamity = "지금은 재난 사항이 없습니다!"
 
         //메인 알림 눌렀을 때 -> 가이드라인으로 이동
         val main_alram = view.findViewById<ConstraintLayout>(R.id.AlarmBar)
@@ -101,6 +101,10 @@ class mainFragment : Fragment(), OnMapReadyCallback {
             }
             "대설" in recentCalamity -> {
                 mainImage.setImageResource(R.drawable.icon_heavysnow)
+            }
+
+            else -> {
+                mainImage.setImageResource(R.drawable.icon_nodisaster)
             }
         }
 
