@@ -45,9 +45,10 @@
 
 ### 구조 
 FE : Kotlin<br/>
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/90192b2a-b975-43c8-a421-e7e08b246084)
+
 BE : Spring, Mysql, python<br/>
 Use : GitHub, Slack, FCM..etc <br/>
-![image](https://github.com/Boknami/beacon/assets/60930743/718abd76-20fc-4acd-a3c6-3dc893b92620)
 
 
 ## 라이센스
