@@ -24,6 +24,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import org.json.JSONObject
+import java.net.SocketTimeoutException
 
 class LocationNotificationWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     companion object {
@@ -56,36 +57,61 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
     private fun sendLocationToServer(location: Location): Boolean {
         val url = "http://43.202.105.197:8080/api/v1/location-token"
 
-        var fcm_tkn = ""
-        val tokenTask = FirebaseMessaging.getInstance().token
-        try {
-            val token = Tasks.await(tokenTask)
-            Log.d("테스트", "Token: $token")
-            fcm_tkn = token
-        } catch (e: Exception) {
-            Log.d("테스트", "Failed to get token: ${e.message}")
+        val maxRetries = 3 // 최대 재시도 횟수
+
+        for (retryCount in 0 until maxRetries) {
+            try {
+                //<-----토큰 전송-------->
+                var fcm_tkn = ""
+                val tokenTask = FirebaseMessaging.getInstance().token
+                try {
+                    val token = Tasks.await(tokenTask)
+                    Log.d("테스트", "Token: $token")
+                    fcm_tkn = token
+                } catch (e: Exception) {
+                    Log.d("테스트", "Failed to get token: ${e.message}")
+                }
+
+                //<-----JSON------>
+                val json = JSONObject().apply {
+                    put("latitude", location.latitude)
+                    //
+                    put("longitude", location.longitude)
+                    put("fcmToken", fcm_tkn)
+                }
+
+                val mediaType = MediaType.parse("application/json")
+                val requestBody = RequestBody.create(mediaType, json.toString())
+                val request = Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build()
+
+                Log.d("테스트", "요청 값: $json")
+                Log.d("테스트", "요청 body: $request")
+                val httpClient = OkHttpClient()
+                val response = httpClient.newCall(request).execute()
+                Log.d("테스트", "응답: $response")
+                if (!response.isSuccessful) {
+                    Log.e("테스트", "서버 응답 오류: ${response.code()}")
+                }
+                // 요청이 성공하면 true 반환
+                if (response.isSuccessful) {
+                    return true
+                }
+            } catch (e: SocketTimeoutException) {
+                // 타임아웃 예외 처리
+                Log.e("테스트", "재시도 $retryCount: 연결 시간 초과 (${e.message})")
+            } catch (e: Exception) {
+                // 기타 예외 처리
+                Log.e("테스트", "재시도 $retryCount: 오류 발생 (${e.message})")
+            }
+
+            // 재시도 전에 대기 시간 설정 (예: 5초)
+            Thread.sleep(5000)
         }
 
-        val json = JSONObject().apply {
-            put("latitude", location.latitude)
-            //
-            put("longitude", location.longitude)
-            put("fcmToken", fcm_tkn)
-        }
-
-        val mediaType = MediaType.parse("application/json")
-        val requestBody = RequestBody.create(mediaType, json.toString())
-        val request = Request.Builder()
-            .url(url)
-            .post(requestBody)
-            .build()
-
-        Log.d("테스트", "요청 값: $json")
-        Log.d("테스트", "요청 body: $request")
-        val httpClient = OkHttpClient()
-        val response = httpClient.newCall(request).execute()
-        Log.d("테스트", "응답: $response")
-        return response.isSuccessful
+        return false
     }
 
     //<--------------현재 위치 함수---------------->

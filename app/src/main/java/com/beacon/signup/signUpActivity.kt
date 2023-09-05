@@ -6,6 +6,7 @@ import com.beacon.basicStart.BaseActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import com.beacon.R
 import com.beacon.databinding.ActivitySignUpBinding
 import com.beacon.databinding.ActivityStartBinding
 import com.beacon.login.signInActivity
@@ -21,6 +22,18 @@ import okhttp3.RequestBody
 
 class signUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
+    private val txt_blank : String by lazy {getString(R.string.dialog_blank)}
+    private val txt_blank_write : String by lazy {getString(R.string.dialog_blank_txt)}
+    private val txt_notRule : String by lazy {getString(R.string.dialog_notLule)}
+    private val txt_Rule  : String by lazy { getString(R.string.dialog_rule)}
+
+    private val dup_email  : String by lazy { getString(R.string.dialog_email_dup)}
+    private val dup_ID  : String by lazy { getString(R.string.dialog_signup_fail)}
+
+    private val txt_goLogin  : String by lazy { getString(R.string.dialog_signup_success)}
+    private val txt_fail_common  : String by lazy { getString(R.string.dialog_signup_fail_common)}
+    private val txt_signup  : String by lazy { getString(R.string.txt_signup)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -36,9 +49,9 @@ class signUpActivity : BaseActivity() {
             if(userId == "" || userPw == "" ||userEmail == "" ){
                 runOnUiThread {
                     val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                        .setTitle("빈 칸이 존재합니다.")
-                        .setMessage("모든 칸을 작성해주세요!")
-                        .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                        .setTitle(txt_blank)
+                        .setMessage(txt_blank_write)
+                        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                         .create()
                     alertDialog.show()
                 }
@@ -49,9 +62,9 @@ class signUpActivity : BaseActivity() {
                 }
                 else{
                     val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                        .setTitle("규칙에 맞는 정보가 아닙니다!")
-                        .setMessage("ID(6자 이상), PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
-                        .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                        .setTitle(txt_notRule)
+                        .setMessage(txt_Rule)
+                        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                         .create()
                     alertDialog.show()
                 }
@@ -66,36 +79,36 @@ class signUpActivity : BaseActivity() {
     fun isValidInput(userId: String, userPw: String, userEmail: String): Boolean {
         // Check userId: 6 characters or more
         if (userId.length < 6) {
-            val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                .setTitle("규칙에 맞는 정보가 아닙니다!")
-                .setMessage("ID(6자 이상)")
-                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
-                .create()
-            alertDialog.show()
+//            val alertDialog = AlertDialog.Builder(this@signUpActivity)
+//                .setTitle(txt_blank)
+//                .setMessage("ID(6자 이상)")
+//                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+//                .create()
+//            alertDialog.show()
             return false
         }
 
         // Check userPw: Is the email format complied with?
         val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.[a-z]+"
         if (!userEmail.matches(emailPattern.toRegex())) {
-            val alertDialog = AlertDialog.Builder   (this@signUpActivity)
-                .setTitle("규칙에 맞는 정보가 아닙니다!")
-                .setMessage("이메일 정보를 다시 확인해주세요!")
-                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
-                .create()
-            alertDialog.show()
+//            val alertDialog = AlertDialog.Builder   (this@signUpActivity)
+//                .setTitle(txt_blank)
+//                .setMessage("이메일 정보를 다시 확인해주세요!")
+//                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+//                .create()
+//            alertDialog.show()
             return false
         }
         
         // Check userEmail: 8 to 16 characters, including at least 1 uppercase and lowercase letter and special characters
         val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$"
         if (!userPw.matches(passwordPattern.toRegex())) {
-            val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                .setTitle("규칙에 맞는 정보가 아닙니다!")
-                .setMessage("PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
-                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
-                .create()
-            alertDialog.show()
+//            val alertDialog = AlertDialog.Builder(this@signUpActivity)
+//                .setTitle(txt_blank)
+//                .setMessage("PW(1개 이상 대소문자 및 특수문자를 포함한 8~16인지 확인해주세요!")
+//                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+//                .create()
+//            alertDialog.show()
             return false
         }
         return true
@@ -133,9 +146,9 @@ class signUpActivity : BaseActivity() {
                     // 실패한 응답 처리
                     runOnUiThread {
                         val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                            .setTitle("이메일 중복")
-                            .setMessage("이메일이 중복됩니다. 다른 이메일을 사용해주세요")
-                            .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                            .setTitle(txt_fail_common)
+                            .setMessage(dup_email)
+                            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                             .create()
                         alertDialog.show()
                     }
@@ -181,9 +194,9 @@ class signUpActivity : BaseActivity() {
                         val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
 
                         val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                            .setTitle("회원가입 성공!")
-                            .setMessage("로그인 페이지로 이동합니다!")
-                            .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
+                            .setTitle(txt_signup)
+                            .setMessage(txt_goLogin)
+                            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss()
                                 // Navigate to the main activity here
                                 val intent = Intent(this@signUpActivity, signInActivity::class.java)
                                 startActivity(intent)
@@ -199,9 +212,9 @@ class signUpActivity : BaseActivity() {
                     Log.d("회원가입", "반응 존재 : 실패!.\nResponse: ${response}")
                     runOnUiThread {
                         val alertDialog = AlertDialog.Builder(this@signUpActivity)
-                            .setTitle("회원가입 실패")
-                            .setMessage("이미 존재하는 ID 입니다.")
-                            .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                            .setTitle(txt_fail_common)
+                            .setMessage(dup_ID)
+                            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                             .create()
                         alertDialog.show()
                     }

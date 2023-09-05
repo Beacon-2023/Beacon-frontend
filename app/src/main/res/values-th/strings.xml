@@ -43,4 +43,17 @@
     <string name="disas_civil_defense">การป้องกันพลเรือน</string>
     <string name="custom_guild_sample">หยิบโทรศัพท์มือถือของคุณ\n\nปิดไฟแก๊ส\n\nถอดปลั๊กสายไฟ</string>
     <string name="check_autoLogin">กรุณาตรวจสอบหากต้องการล็อกอินอัตโนมัติ!</string>
+    <string name="dialog_blank">มีช่องว่างอยู่ค่ะ</string>
+    <string name="dialog_blank_txt">กรุณากรอกทุกช่องค่ะ!</string>
+    <string name="dialog_notLule">ไม่ใช่ข้อมูลที่ถูกต้องสำหรับกฎค่ะ!</string>
+    <string name="dialog_rule">หมายเลข (มากกว่า 6 ตัวอักษร)\\nรหัสลับ (1 ตัวขึ้นไปรวมทั้งตัวพิมพ์ใหญ่และตัวพิมพ์พิเศษ)\\nทั้งหมด 8-16 หรือเปล่า ช่วยเช็คด้วยนะครับ!</string>
+    <string name="dialog_logout_gomain">สำเร็จ: ไปที่หน้าหลัก!</string>
+    <string name="dialog_logout_noUser">ความล้มเหลว: ไม่ใช่สมาชิก!</string>
+    <string name="dialog_lang">ตั้งค่าภาษา</string>
+    <string name="dialog_lang_gomain">แอพจะเริ่มทำงานใหม่สำหรับการประยุกต์ใช้ค่ะ</string>
+    <string name="main_noDisaster">今は災難がありません！</string>
+    <string name="dialog_signup_success">สำเร็จ: ไปที่หน้าล็อกอิน!</string>
+    <string name="dialog_email_dup">ล้มเหลว: อีเมลซ้ำ!</string>
+    <string name="dialog_signup_fail">ความล้มเหลว: ไอดีที่มีอยู่ก่อนแล้ว</string>
+    <string name="dialog_signup_fail_common">การสมัครสมาชิกล้มเหลว</string>
 </resources>

@@ -43,4 +43,17 @@
     <string name="disas_civil_defense">民間防衛</string>
     <string name="custom_guild_sample">携帯電話を持ってください\n\nガスの火を消してください\n\n電線を抜いてください。</string>
     <string name="check_autoLogin">自動ログインをご希望の場合はチェ\nクしてください！</string>
+    <string name="dialog_blank">空欄が存在します。</string>
+    <string name="dialog_blank_txt">すべてのマスを作成してください！</string>
+    <string name="dialog_notLule">ルールに合う情報ではありません！</string>
+    <string name="dialog_rule">ID(6文字以上)\\nPW(1つ以上の大文字と特殊文字を含む)\\n合計8~16であることを確認してください！</string>
+    <string name="dialog_logout_gomain">成功:メインページに移動します！</string>
+    <string name="dialog_logout_noUser">失敗:会員ではありません！</string>
+    <string name="dialog_lang">言語設定</string>
+    <string name="dialog_lang_gomain">適用のためにアプリが再起動されます。</string>
+    <string name="main_noDisaster">今は災難がありません！</string>
+    <string name="dialog_signup_success">成功:ログインページに移動します！</string>
+    <string name="dialog_email_dup">失敗: メールが重複しています！</string>
+    <string name="dialog_signup_fail">失敗: 既に存在するIDです。</string>
+    <string name="dialog_signup_fail_common">会員登録失敗</string>
 </resources>

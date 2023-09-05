@@ -2,17 +2,22 @@ package com.beacon.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.beacon.R
+import com.beacon.settings.guildLine.viewGuildLineActivity
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.DataOutputStream
@@ -24,10 +29,11 @@ import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
+import java.util.Locale
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     companion object {
-        private const val TAG = "테스트"
+        private const val TAG = "번역"
         val notificationId = 123 // Use a value that makes sense for your app
     }
 
@@ -38,16 +44,47 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (remoteMessage.notification != null) {
             // Notification payload
+            Log.d(TAG, "notification")
             val title = remoteMessage.notification?.title
             val body = remoteMessage.notification?.body
-            showNotification(title, body)
-        }
 
+            if (title != null && body != null) {
+                val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+                val currentLocale = sharedPreferences.getString("My_Lang", "")
+
+                // 백그라운드 스레드 또는 코루틴을 사용하여 번역 서비스 호출
+                GlobalScope.launch(Dispatchers.IO) {
+                    val translatedTitle = translateWithNmtApi(title, currentLocale.toString())
+                    val translatedBody = translateWithNmtApi(body, currentLocale.toString())
+
+                    // UI 스레드에서 알림을 표시
+                    withContext(Dispatchers.Main) {
+                        showNotification(translatedTitle, translatedBody)
+                    }
+                }
+            }
+        }
         else if (remoteMessage.data.isNotEmpty()) {
             // Data payload
+            Log.d(TAG, "data")
             val title = remoteMessage.data["title"]
             val body = remoteMessage.data["body"]
-            showNotification(title, body)
+
+            if (title != null && body != null) {
+                val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+                val currentLocale = sharedPreferences.getString("My_Lang", "")
+
+                // 백그라운드 스레드 또는 코루틴을 사용하여 번역 서비스 호출
+                GlobalScope.launch(Dispatchers.IO) {
+                    val translatedTitle = translateWithNmtApi(title, currentLocale.toString())
+                    val translatedBody = translateWithNmtApi(body, currentLocale.toString())
+
+                    // UI 스레드에서 알림을 표시
+                    withContext(Dispatchers.Main) {
+                        showNotification(translatedTitle, translatedBody)
+                    }
+                }
+            }
         }
     }
 
@@ -65,32 +102,33 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val currentLocale = resources.configuration.locale
+        val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val currentLocale = sharedPreferences.getString("My_Lang", "")
+        Log.d("번역", "현재 로케일 : ${currentLocale}")
 
-        if(currentLocale.toString() == "ja"){
-            translateWithNmtApi(title.toString(), "ja")
-        }
-        else if(currentLocale.toString() == "zh"){
-            translateWithNmtApi(title.toString(), "zh")
-        }
-        else if(currentLocale.toString() == "en"){
-            translateWithNmtApi(title.toString(), "en")
-        }
-        else if(currentLocale.toString() == "th"){
-            translateWithNmtApi(title.toString(), "th")
-        }
+        // Coroutine scope
+        GlobalScope.launch(Dispatchers.Main) {
+            // Perform translation in a coroutine
+            val translatedTitle = translateWithNmtApi(title.toString(), currentLocale.toString())
+            val translatedBody = translateWithNmtApi(body.toString(), currentLocale.toString())
 
-        val notificationBuilder = NotificationCompat.Builder(this, "channel_id")
-            .setContentTitle(title)
-            .setContentText(body)
-            .setSmallIcon(R.drawable.icon_rain)
-        // set other notification properties
+            // Continue building the notification with translatedTitle and translatedBody
+            val intent = Intent(this@MyFirebaseMessagingService, viewGuildLineActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(this@MyFirebaseMessagingService, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
 
-        notificationManager.notify(notificationId, notificationBuilder.build())
+            val notificationBuilder = NotificationCompat.Builder(this@MyFirebaseMessagingService, "channel_id")
+                .setContentTitle(translatedTitle)
+                .setContentText(translatedBody)
+                .setSmallIcon(R.drawable.icon_beacon)
+                .setContentIntent(pendingIntent)
+
+            notificationManager.notify(notificationId, notificationBuilder.build())
+        }
     }
 
 
-    private fun translateWithNmtApi(value : String, toLanguage : String) {
+    private suspend fun translateWithNmtApi(value: String, toLanguage: String): String {
         val clientId = "rEQ9nMHXaly9DJjySccs" // Replace with your application client ID
         val clientSecret = "dzCeXwa26O" // Replace with your application client secret
 
@@ -106,8 +144,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         requestHeaders["X-Naver-Client-Id"] = clientId
         requestHeaders["X-Naver-Client-Secret"] = clientSecret
 
-        // Perform network operation using a coroutine on IO dispatcher
-        GlobalScope.launch(Dispatchers.IO) {
+        return withContext(Dispatchers.IO) {
             val responseBody = post(apiURL, requestHeaders, text, toLanguage)
             Log.d("번역", responseBody)
 
@@ -117,6 +154,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .getString("translatedText")
 
             Log.d("번역", translatedText)
+            translatedText // Return the translated text
         }
     }
 

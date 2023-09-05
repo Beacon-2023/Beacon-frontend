@@ -47,5 +47,18 @@
     <string name="disas_civil_defense">민방위</string>
     <string name="custom_guild_sample">휴대폰을 챙기세요\n\n가스불을 끄세요\n\n전기선을 뽑으세요</string>
     <string name="check_autoLogin">자동 로그인을 원하시면 체크해주세요!</string>
+    <string name="dialog_blank">빈 칸이 존재합니다.</string>
+    <string name="dialog_blank_txt">모든 칸을 작성해주세요!</string>
+    <string name="dialog_notLule">규칙에 맞는 정보가 아닙니다!</string>
+    <string name="dialog_rule">ID(6자이상) | PW(1개 이상 대소문자 및 특수문자를 포함) | 총 8~16인지 확인해주세요!</string>
+    <string name="dialog_logout_gomain">성공 : 메인페이지로 이동합니다!</string>
+    <string name="dialog_logout_noUser">실패 : 회원이 아닙니다!</string>
+    <string name="dialog_lang">언어 설정</string>
+    <string name="dialog_lang_gomain">적용을 위해 앱이 재시작됩니다.</string>
+    <string name="main_noDisaster">지금은 재난이 없습니다!</string>
+    <string name="dialog_signup_success">성공 : 로그인 페이지로 이동합니다!</string>
+    <string name="dialog_email_dup">실패 : 이메일이 중복됩니다!</string>
+    <string name="dialog_signup_fail">실패 : 이미 존재하는 아이디입니다.</string>
+    <string name="dialog_signup_fail_common">회원가입 실패</string>
 
 </resources>

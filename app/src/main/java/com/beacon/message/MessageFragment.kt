@@ -44,11 +44,11 @@ class messageFragment : Fragment() {
         val items = mutableListOf<CardViewItem>()
 
         val data = listOf(
-            Triple("호우", "August 13 23:10", "'Heavy rain' warning in 'Seoul' area"),
-            Triple("대설", "August 13 23:12", "'Heavy rain' warning in 'Seoul' area"),
-            Triple("지진", "August 13 23:13", "'Heavy rain' warning in 'Seoul' area"),
-            Triple("태풍", "August 13 23:14", "'Heavy rain' warning in 'Seoul' area"),
-            Triple("산불", "August 13, 23:15", "'Heavy rain' warning in 'Seoul' area")
+            Triple("호우", "23년 9월 1일 10:20", "서울 지역 호우 주의"),
+            Triple("대설", "23년 9월 1일 14:11", "서울 지역 대설 주의"),
+            Triple("지진", "23년 9월 1일 15:33", "서울 지역 지진 주의"),
+            Triple("태풍", "23년 9월 1일 16:11", "서울 지역 태풍 주의"),
+            Triple("산불", "23년 9월 1일 20:12", "서울 지역 산불 주의")
         )
 
         for (triple in data) {

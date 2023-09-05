@@ -42,4 +42,18 @@
     <string name="disas_forest_fires">森林大火</string>
     <string name="disas_civil_defense">民防</string>
     <string name="custom_guild_sample">拿起你的手机\n\n关掉煤气炉\n\n拔掉电源线。</string>
+    <string name="check_autoLogin">如果您想自动登录，请确认！</string>
+    <string name="dialog_blank">空格已存在 。</string>
+    <string name="dialog_blank_txt">请填写所有栏！</string>
+    <string name="dialog_notLule">不符合规则的信息！</string>
+    <string name="dialog_rule">ID（6个字以上）\\nPW（包含1个以上大小写和特殊字符）\\n请确认是否共8~16！</string>
+    <string name="dialog_logout_gomain">成功: 转到主页 ！</string>
+    <string name="dialog_logout_noUser">失败: 不是会员！</string>
+    <string name="dialog_lang">语言设置</string>
+    <string name="dialog_lang_gomain">应用程序将重新启动。</string>
+    <string name="main_noDisaster">现在没有灾难！</string>
+    <string name="dialog_signup_success">成功: 转到登录页面 ！</string>
+    <string name="dialog_email_dup">失败: 电子邮件重复 ！</string>
+    <string name="dialog_signup_fail">失败: 已存在的用户名 。</string>
+    <string name="dialog_signup_fail_common">注册会员失败</string>
 </resources>

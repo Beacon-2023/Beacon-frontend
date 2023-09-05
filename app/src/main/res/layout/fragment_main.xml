@@ -39,7 +39,7 @@
             android:layout_marginTop="64dp"
             android:layout_marginBottom="22dp"
             android:fontFamily="@font/fontlight"
-            android:text="클릭하면 관련 가이드가 나와요!"
+            android:text="@string/txt_click_guild"
             android:textColor="@color/white"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -61,6 +61,9 @@ class settingsFragment : Fragment() {
             startActivity(intent)
         }
 
+        val dia_suc = getString(R.string.dialog_logout_gomain)
+        val dia_logout = getString(R.string.txt_logout)
+
         val btnSetLogout : Button = view.findViewById(R.id.btn_logout)
         btnSetLogout.setOnClickListener{
             //sharedPreferences에 저장된 ID,password 값을 null로 변경하고 ActivityStartBinding로 이동할 수 있도록
@@ -74,8 +77,8 @@ class settingsFragment : Fragment() {
 
             //API요청해야함..로그아웃!
             val alertDialog = AlertDialog.Builder(requireContext())
-                .setTitle("로그아웃 성공")
-                .setMessage("메인페이지로 이동합니다!")
+                .setTitle(dia_logout)
+                .setMessage(dia_suc)
                 .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
                     // Navigate to the main activity here
                     val intent = Intent(requireContext(), ActivityStartBinding::class.java)

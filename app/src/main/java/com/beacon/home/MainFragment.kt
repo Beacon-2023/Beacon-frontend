@@ -66,9 +66,10 @@ class mainFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //<---------------최근 내역에서 찾는 게 맞을 것 같긴해..-------------->
+        //API 이용해서 가장 최근 재난 받아오기!
         val recentCalamity = "지금은 재난 사항이 없습니다!"
 
-        //메인 알림 눌렀을 때 -> 가이드라인으로 이동
+        //클릭 시 가이드라인으로 이동
         val main_alram = view.findViewById<ConstraintLayout>(R.id.AlarmBar)
         main_alram.setOnClickListener {
             val intent = Intent(requireContext(), viewGuildLineActivity::class.java)
@@ -76,9 +77,12 @@ class mainFragment : Fragment(), OnMapReadyCallback {
             startActivity(intent)
         }
 
-        //메인 알림에 나오는 문구
+        //메인 알림에 나오는 문구 => 파파고 이용해서 번역해서함!
         val mainTxt = view.findViewById<TextView>(R.id.txt_mainInformation)
         mainTxt.setText(recentCalamity)
+
+        //클릭하면 가이드가 나온다는 내용은 resoure파일
+
 
         //재난 관련 이미지가 나타난다.
         val mainImage = view.findViewById<ImageView>(R.id.img_weather)

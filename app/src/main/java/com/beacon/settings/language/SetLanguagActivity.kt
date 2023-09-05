@@ -3,13 +3,17 @@ package com.beacon.settings.language
 import com.beacon.basicStart.BaseActivity
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.beacon.R
+import com.beacon.login.signInActivity
+import com.beacon.startActivity
 import java.util.Locale
 
 class setLanguageActivity : BaseActivity() {
@@ -20,11 +24,15 @@ class setLanguageActivity : BaseActivity() {
     private lateinit var btnJp: AppCompatButton
     private lateinit var language_code: String
 
+    // 이곳에 dia_title과 dia_body를 초기화합니다.
+    private val dia_title: String by lazy { getString(R.string.dialog_lang) }
+    private val dia_body: String by lazy { getString(R.string.dialog_lang_gomain) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_language_main)
 
-
+        //Log.d("TEST", "$dia_title |  $dia_body")
         // 저장된 언어 코드 불러오기!
         val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
         val language = sharedPreferences.getString("My_Lang", "")
@@ -51,32 +59,45 @@ class setLanguageActivity : BaseActivity() {
         btnKorean.setOnClickListener {
             updateButtonColors(btnKorean)
             setLocale("ko")
-            recreate()
+            showExitConfirmationDialog()
         }
 
         btnJp.setOnClickListener {
             updateButtonColors(btnJp)
             setLocale("ja")
-            recreate()
+            showExitConfirmationDialog()
         }
 
         btnChinese.setOnClickListener {
             updateButtonColors(btnChinese)
             setLocale("zh")
-            recreate()
+            showExitConfirmationDialog()
         }
 
         btnEnglish.setOnClickListener {
             updateButtonColors(btnEnglish)
             setLocale("en")
-            recreate()
+            showExitConfirmationDialog()
         }
 
         btnThai.setOnClickListener {
             updateButtonColors(btnThai)
             setLocale("th")
-            recreate()
+            showExitConfirmationDialog()
         }
+    }
+
+    private fun showExitConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(dia_title)
+            .setMessage(dia_body)
+            .setPositiveButton("OK") { _, _ ->
+                val intent = Intent(this, startActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     private fun updateButtonColors(selectedButton: AppCompatButton) {

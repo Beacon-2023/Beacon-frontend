@@ -114,11 +114,11 @@ class startActivity : BaseActivity() {
             }
 
             //PAPAGO API
-            Log.d("번역", "오늘의 테스트")
-            translateWithNmtApi("오늘의 테스트", "en")
-            translateWithNmtApi("오늘의 테스트", "ja")
-            translateWithNmtApi("오늘의 테스트", "th")
-            translateWithNmtApi("오늘의 테스트", "zh-CN")
+//            Log.d("번역", "오늘의 테스트")
+//            translateWithNmtApi("오늘의 테스트", "en")
+//            translateWithNmtApi("오늘의 테스트", "ja")
+//            translateWithNmtApi("오늘의 테스트", "th")
+//            translateWithNmtApi("오늘의 테스트", "zh-CN")
         }
 
 

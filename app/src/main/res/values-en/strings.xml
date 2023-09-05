@@ -31,7 +31,7 @@
     <string name="hint_email">Please enter your email.</string>
     <string name="txt_email">Enter Email</string>
     <string name="next">Next</string>
-    <string name="txt_pw_constraint">8-16 with one or more case and special characters</string>
+    <string name="txt_pw_constraint">8-16 with one or more case\nand special characters</string>
     <string name="txt_click_guild">Click to get the relevant guide!</string>
     <string name="basic_rules">basic rules</string>
     <string name="nearby_shelter">nearby shelter</string>
@@ -43,4 +43,17 @@
     <string name="disas_civil_defense">civil defense</string>
     <string name="custom_guild_sample">Take your cell phone\n\nTurn off the gas\n\nPlease pull out the electrical wire</string>
     <string name="check_autoLogin">Please check if you want\nautomatic login!</string>
+    <string name="dialog_blank">Blank space exists.</string>
+    <string name="dialog_blank_txt">Please fill out all the blanks!</string>
+    <string name="dialog_notLule">Information not in accordance with the rules!</string>
+    <string name="dialog_rule">ID (6 or more characters)\nPW (including 1 or more case and special characters)\nPlease make sure the total is 8-16!</string>
+    <string name="dialog_logout_gomain">Success: Go to the main page!</string>
+    <string name="dialog_logout_noUser">Failed: Not a member!</string>
+    <string name="dialog_lang">Language settings</string>
+    <string name="dialog_lang_gomain">The app will be restarted for application.</string>
+    <string name="main_noDisaster">There is no disaster now!</string>
+    <string name="dialog_signup_success">Success: Go to the login page!</string>
+    <string name="dialog_email_dup">Failed: Duplicate email!</string>
+    <string name="dialog_signup_fail">Failed: The ID already exists.</string>
+    <string name="dialog_signup_fail_common">Failed to sign up for membership</string>
 </resources>

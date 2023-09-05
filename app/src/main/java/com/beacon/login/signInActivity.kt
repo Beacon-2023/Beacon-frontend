@@ -45,6 +45,10 @@ class signInActivity : BaseActivity() {
             }
         }
 
+        val title = getString(R.string.dialog_blank)
+        val message = getString(R.string.dialog_blank_txt)
+
+
         //로그인 처리 로직 구현하기
         binding.btnSignin.setOnClickListener{
             val userId= binding.inputId.text.toString()
@@ -54,8 +58,8 @@ class signInActivity : BaseActivity() {
             if(userId == "" || userPw == ""){
                 runOnUiThread {
                     val alertDialog = AlertDialog.Builder(this@signInActivity)
-                        .setTitle("빈 칸이 존재합니다.")
-                        .setMessage("모든 칸을 작성해주세요!")
+                        .setTitle(R.string.dialog_blank)
+                        .setMessage(R.string.dialog_blank_txt)
                         .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
                         .create()
                     alertDialog.show()
