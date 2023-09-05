@@ -55,10 +55,10 @@ Use : GitHub, Slack, FCM..etc <br/>
 ## Getting started
 #### 설치
 
-1.  저장소를 복제합니다.
+1.  저장소를 복제합니다.<br/>
     `git clone https://github.com/Beacon-2023/Beacon-frontend.git` 
     
-2.  프로젝트 디렉터리로 이동합니다.
+2.  프로젝트 디렉터리로 이동합니다.<br/>
 `cd Beacon-frontend`
 #### 사용법
 
