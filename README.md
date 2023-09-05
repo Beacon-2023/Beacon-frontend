@@ -1,3 +1,4 @@
+
 # beacon
 ![image](https://github.com/Boknami/beacon/assets/60930743/cdbde486-9b8f-4540-93cf-6fd000c77b9c)
 지역별 실시간 재난 속보 및 안전 대응 앱 <br/>
@@ -50,6 +51,27 @@ FE : Kotlin<br/>
 BE : Spring, Mysql, python<br/>
 Use : GitHub, Slack, FCM..etc <br/>
 
+
+## Getting started
+#### 설치
+
+1.  저장소를 복제합니다.
+    `git clone https://github.com/Beacon-2023/Beacon-frontend.git` 
+    
+2.  프로젝트 디렉터리로 이동합니다.
+`cd Beacon-frontend`
+#### 사용법
+
+1.  프로젝트를 빌드
+   
+        ./gradlew build` 
+        
+2.  프로젝트 실행
+      
+		 ./gradlew run`
+
+
+-   이제 프로젝트가 실행되는 것을 볼 수 있습니다.
 
 ## 라이센스
 
