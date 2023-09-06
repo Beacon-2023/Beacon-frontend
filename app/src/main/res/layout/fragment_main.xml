@@ -25,37 +25,38 @@
             android:fontFamily="@font/fontlight"
             android:text="현재 '서울' 지역 호우"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.354"
             app:layout_constraintStart_toEndOf="@+id/img_weather"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.333" />
+            app:layout_constraintVertical_bias="0.296" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="22dp"
+            android:layout_marginStart="48dp"
             android:fontFamily="@font/fontlight"
             android:text="@string/txt_click_guild"
             android:textColor="@color/white"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.34"
+            app:layout_constraintHorizontal_bias="0.169"
             app:layout_constraintStart_toEndOf="@+id/img_weather"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_mainInformation"
+            app:layout_constraintVertical_bias="0.384" />
 
         <ImageView
             android:id="@+id/img_weather"
             android:layout_width="54dp"
             android:layout_height="54dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/icon_rain"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txt_mainInformation"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -18,6 +18,7 @@ import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 
 class signUpActivity : BaseActivity() {
@@ -134,7 +135,7 @@ class signUpActivity : BaseActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 //Log.d("회원가입", "응답이 존재합니다.\n응답 : ${response}")
-                val responseBody = response.body()?.string()
+                val responseBody = response.body?.string()
 
                 // 서버 응답에 따른 처리
                 if (response.isSuccessful) {
@@ -171,7 +172,7 @@ class signUpActivity : BaseActivity() {
             put("email", userEmail)
         }
 
-        val mediaType = MediaType.parse("application/json")
+        val mediaType = "application/json".toMediaTypeOrNull()
         val requestBody = RequestBody.create(mediaType, json.toString())
         val request = Request.Builder()
             .url(url)
@@ -184,7 +185,7 @@ class signUpActivity : BaseActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val responseBody = response.body()?.string()
+                val responseBody = response.body?.string()
 
                 if (response.isSuccessful) {
                     runOnUiThread {

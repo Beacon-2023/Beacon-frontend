@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -80,7 +81,7 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
                     put("fcmToken", fcm_tkn)
                 }
 
-                val mediaType = MediaType.parse("application/json")
+                val mediaType = "application/json".toMediaTypeOrNull()
                 val requestBody = RequestBody.create(mediaType, json.toString())
                 val request = Request.Builder()
                     .url(url)
@@ -93,7 +94,7 @@ class LocationNotificationWorker(appContext: Context, workerParams: WorkerParame
                 val response = httpClient.newCall(request).execute()
                 Log.d("테스트", "응답: $response")
                 if (!response.isSuccessful) {
-                    Log.e("테스트", "서버 응답 오류: ${response.code()}")
+                    Log.e("테스트", "서버 응답 오류: ${response.code}")
                 }
                 // 요청이 성공하면 true 반환
                 if (response.isSuccessful) {

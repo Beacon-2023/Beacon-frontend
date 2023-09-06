@@ -108,18 +108,21 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Coroutine scope
         GlobalScope.launch(Dispatchers.Main) {
-            // Perform translation in a coroutine
-            val translatedTitle = translateWithNmtApi(title.toString(), currentLocale.toString())
-            val translatedBody = translateWithNmtApi(body.toString(), currentLocale.toString())
+//            // Perform translation in a coroutine
+//            val translatedTitle = translateWithNmtApi(title.toString(), currentLocale.toString())
+//            val translatedBody = translateWithNmtApi(body.toString(), currentLocale.toString())
 
             // Continue building the notification with translatedTitle and translatedBody
             val intent = Intent(this@MyFirebaseMessagingService, viewGuildLineActivity::class.java)
+            //값 넘겨주기
+            intent.putExtra("disaster", title)
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this@MyFirebaseMessagingService, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
 
             val notificationBuilder = NotificationCompat.Builder(this@MyFirebaseMessagingService, "channel_id")
-                .setContentTitle(translatedTitle)
-                .setContentText(translatedBody)
+                .setContentTitle(title)
+                .setContentText(body)
                 .setSmallIcon(R.drawable.icon_beacon)
                 .setContentIntent(pendingIntent)
 

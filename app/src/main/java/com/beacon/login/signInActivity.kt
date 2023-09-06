@@ -1,5 +1,4 @@
 package com.beacon.login
-
 import android.content.Context
 import com.beacon.basicStart.BaseActivity
 import android.content.Intent
@@ -9,15 +8,11 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.beacon.NaviActivity
 import com.beacon.R
+import com.beacon.communication.MyOkHttpClient
 import com.beacon.databinding.ActivitySignInBinding
 import com.beacon.signup.signUpActivity
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -25,6 +20,8 @@ class signInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
     var isCheckedAuto = 0
 
+    lateinit var login : String
+    lateinit var fail_login : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -37,17 +34,11 @@ class signInActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        binding.isCheckedAutoLogin.setOnCheckedChangeListener{ _, isChecked ->
-            if(isChecked) {
-                isCheckedAuto = 1
-            }else{
-                isCheckedAuto = 0
-            }
-        }
 
         val title = getString(R.string.dialog_blank)
         val message = getString(R.string.dialog_blank_txt)
-
+        login = getString(R.string.txt_login)
+        fail_login = getString(R.string.login_fail)
 
         //로그인 처리 로직 구현하기
         binding.btnSignin.setOnClickListener{
@@ -71,11 +62,8 @@ class signInActivity : BaseActivity() {
         }
     }
 
-
     private fun loginUser(userId: String, userPw: String) {
         Log.d("로그인", "로그인을 시도합니다 ID: $userId PW: $userPw")
-
-        val client = OkHttpClient()
 
         val url = "http://43.202.105.197:8080/api/v1/members/login"
 
@@ -84,44 +72,45 @@ class signInActivity : BaseActivity() {
             put("password", userPw)
         }
 
-        val mediaType = MediaType.parse("application/json")
+        val mediaType = "application/json".toMediaTypeOrNull()
         val requestBody = RequestBody.create(mediaType, json.toString())
         val request = Request.Builder()
             .url(url)
             .post(requestBody)
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        MyOkHttpClient.instance.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("로그인", "Failed.\nReason: ${e}")
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val responseBody = response.body()?.string()
+                val responseBody = response.body?.string()
 
                 if (response.isSuccessful) {
                     runOnUiThread {
+                        Log.d("로그인", "[성공] 응답 존재\n응답: ${response}")
                         //<-------------------로컬에 회원가입 내역 저장----------------->
                         //[ADD] : 자동 로그인이 체크 여부 확인!
-                        if(isCheckedAuto == 1){
                             Log.d("로그인", "[자동 로그인] : O")
                             val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
                             editor.putString("ID", userId)
                             editor.putString("password", userPw)
                             editor.apply()
-                        }
+
                         val intent = Intent(this@signInActivity, NaviActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                 } else {
                     runOnUiThread {
                         Log.d("로그인", "[실패] 응답 존재\n응답: ${responseBody}")
 
                         val alertDialog = AlertDialog.Builder(this@signInActivity)
-                            .setTitle("로그인 실패")
-                            .setMessage("입력하신 정보를 다시 확인해주세요!")
-                            .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                            .setTitle(login)
+                            .setMessage(fail_login)
+                            .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
                             .create()
                         alertDialog.show()
                     }

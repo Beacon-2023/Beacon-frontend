@@ -1,6 +1,7 @@
 package com.beacon.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
@@ -34,6 +35,19 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Align
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.DataOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.UnsupportedEncodingException
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
+import java.net.URLEncoder
 import java.util.Locale
 
 private const val ARG_PARAM1 = "param1"
@@ -67,7 +81,7 @@ class mainFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //<---------------최근 내역에서 찾는 게 맞을 것 같긴해..-------------->
         //API 이용해서 가장 최근 재난 받아오기!
-        val recentCalamity = "지금은 재난 사항이 없습니다!"
+        val recentCalamity = "서울 호우주의보 발효"
 
         //클릭 시 가이드라인으로 이동
         val main_alram = view.findViewById<ConstraintLayout>(R.id.AlarmBar)
@@ -78,8 +92,20 @@ class mainFragment : Fragment(), OnMapReadyCallback {
         }
 
         //메인 알림에 나오는 문구 => 파파고 이용해서 번역해서함!
-        val mainTxt = view.findViewById<TextView>(R.id.txt_mainInformation)
-        mainTxt.setText(recentCalamity)
+        val sharedPreferences = requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val currentLocale = sharedPreferences.getString("My_Lang", "")
+        Log.d("번역", "현재 로케일 : ${currentLocale}")
+
+        if(currentLocale.toString() != "ko"){
+            val mainTxt = view.findViewById<TextView>(R.id.txt_mainInformation)
+            translateWithNmtApi(recentCalamity, currentLocale.toString()) { translatedText ->
+                // Use the translated text here
+                requireActivity().runOnUiThread {
+                    if(translatedText != null)
+                        mainTxt.setText(translatedText)
+                }
+            }
+        }
 
         //클릭하면 가이드가 나온다는 내용은 resoure파일
 
@@ -126,6 +152,93 @@ class mainFragment : Fragment(), OnMapReadyCallback {
 
         // FusedLocationProviderClient + 지자기 + 가속도 센서를 활용해 최적의 위치를 반환하는 구현체인 FusedLocationSource를 제공
         locationSource = FusedLocationSource(requireActivity(), LOCATION_PERMISSION_REQUEST_CODE)
+    }
+
+    private fun translateWithNmtApi(
+        value: String,
+        toLanguage: String,
+        callback: (String) -> Unit
+    ) {
+        val clientId = "rEQ9nMHXaly9DJjySccs" // Replace with your application client ID
+        val clientSecret = "dzCeXwa26O" // Replace with your application client secret
+
+        val apiURL = "https://openapi.naver.com/v1/papago/n2mt"
+        val text: String
+        try {
+            text = URLEncoder.encode(value, "UTF-8")
+        } catch (e: UnsupportedEncodingException) {
+            throw RuntimeException("Encoding failed", e)
+        }
+
+        val requestHeaders = mutableMapOf<String, String>()
+        requestHeaders["X-Naver-Client-Id"] = clientId
+        requestHeaders["X-Naver-Client-Secret"] = clientSecret
+
+        Thread {
+            val responseBody = post(apiURL, requestHeaders, text, toLanguage)
+            Log.d("번역", responseBody)
+
+            val jsonObject = JSONObject(responseBody)
+            val translatedText = jsonObject.getJSONObject("message")
+                .getJSONObject("result")
+                .getString("translatedText")
+
+            Log.d("번역", translatedText)
+            callback(translatedText)
+        }.start()
+    }
+
+
+    private fun post(apiUrl: String, requestHeaders: Map<String, String>, text: String, toLanguage : String): String {
+        val con = connect(apiUrl)
+        val postParams = "source=ko&target=$toLanguage&text=$text" // <-------여기서 번역 어떻게 할 지 !!!!------>
+        try {
+            con.requestMethod = "POST"
+            for ((key, value) in requestHeaders) {
+                con.setRequestProperty(key, value)
+            }
+
+            con.doOutput = true
+            DataOutputStream(con.outputStream).use { wr ->
+                wr.write(postParams.toByteArray())
+                wr.flush()
+            }
+
+            val responseCode = con.responseCode
+            return if (responseCode == HttpURLConnection.HTTP_OK) {
+                readBody(con.inputStream)
+            } else {
+                readBody(con.errorStream)
+            }
+        } catch (e: IOException) {
+            throw RuntimeException("API request and response failed", e)
+        } finally {
+            con.disconnect()
+        }
+    }
+
+    private fun connect(apiUrl: String): HttpURLConnection {
+        return try {
+            val url = URL(apiUrl)
+            url.openConnection() as HttpURLConnection
+        } catch (e: MalformedURLException) {
+            throw RuntimeException("The API URL is invalid: $apiUrl", e)
+        } catch (e: IOException) {
+            throw RuntimeException("Connection failed: $apiUrl", e)
+        }
+    }
+
+    private fun readBody(body: InputStream): String {
+        InputStreamReader(body).use { streamReader ->
+            BufferedReader(streamReader).use { lineReader ->
+                val responseBody = StringBuilder()
+                var line: String?
+                while (lineReader.readLine().also { line = it } != null) {
+                    responseBody.append(line)
+                }
+                return responseBody.toString()
+            }
+        }
     }
 
     //NaverMap 객체가 준비되면 => OnMapReady() 콜백 메서드 호출

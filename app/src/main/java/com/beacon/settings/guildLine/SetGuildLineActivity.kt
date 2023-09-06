@@ -17,7 +17,6 @@ class setGuildLineActivity : BaseActivity() {
 
         val frameData = arrayListOf(
             DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_heavy_rain), 0),
-            DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_heavy_snow), 0),
             DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_Earthquake), 0),
             DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_Typhoon), 0),
             DisasterData(R.drawable.icon_check_mark, getString(R.string.disas_forest_fires), 0),

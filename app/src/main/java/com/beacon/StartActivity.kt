@@ -13,7 +13,9 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import com.beacon.communication.MyOkHttpClient
 import com.beacon.data.AppDatabase
 import com.beacon.data.DataRepository
 import com.beacon.databinding.ActivityStartBinding
@@ -28,6 +30,7 @@ import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -62,7 +65,7 @@ class startActivity : BaseActivity() {
         val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
         val savedUserID  = sharedPreferences.getString("ID", null)
         val savedPassword  = sharedPreferences.getString("password", null)
-
+        Log.d("자동 로그인", "$savedUserID | $savedPassword")
         if(savedUserID != null) {
             AutoLogin(savedUserID, savedPassword)
         }
@@ -143,7 +146,7 @@ class startActivity : BaseActivity() {
             put("userName", ID)
         }
 
-        val mediaType = MediaType.parse("application/json")
+        val mediaType = "application/json".toMediaTypeOrNull()
         val requestBody = RequestBody.create(mediaType, json.toString())
         val request = Request.Builder()
             .url(url)
@@ -171,20 +174,20 @@ class startActivity : BaseActivity() {
                 put("password", savedUserPassword)
             }
 
-            val mediaType = MediaType.parse("application/json")
+            val mediaType = "application/json".toMediaTypeOrNull()
             val requestBody = RequestBody.create(mediaType, json.toString())
             val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
                 .build()
 
-            client.newCall(request).enqueue(object : Callback {
+            MyOkHttpClient.instance.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.d("로그인", "Failed.\nReason: ${e}")
+                    Log.d("자동 로그인", "Failed.\nReason: ${e}")
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val responseBody = response.body()?.string()
+                    val responseBody = response.body?.string()
 
                     if (response.isSuccessful) {
                         runOnUiThread {
@@ -193,12 +196,23 @@ class startActivity : BaseActivity() {
                         }
                     } else {
                         runOnUiThread {
-                            Log.d("로그인", "응답 성공 : 실패.\n응답: ${responseBody}")
+                            Log.d("자동 로그인", "응답[실패].\n응답: ${responseBody}")
 
                             val alertDialog = AlertDialog.Builder(this@startActivity)
-                                .setTitle("로그인 실패")
-                                .setMessage("입력하신 정보를 다시 확인해주세요!")
-                                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+                                .setTitle("자동 로그인 실패")
+                                .setMessage("서버가 불안정하여 자동 로그인 정보를 삭제합니다. 다시 로그인 부탁드립니다.")
+                                .setPositiveButton("확인") { dialog, _ -> dialog.dismiss()
+                                    //sharedPreferences에 저장된 ID,password 값을 null로 변경하고 ActivityStartBinding로 이동할 수 있도록
+                                    val sharedPreferences = getSharedPreferences("user_Information", Context.MODE_PRIVATE)
+                                    val editor = sharedPreferences.edit()
+                                    editor.putString("ID", null)
+                                    editor.putString("password", null)
+                                    editor.apply()
+
+                                    val intent = Intent(this@startActivity, startActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
                                 .create()
                             alertDialog.show()
                         }
@@ -291,38 +305,38 @@ class startActivity : BaseActivity() {
     }
 
     private fun getPermission() {
+        // Android 12 이상에서 배터리 최적화 무시 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // Request ignore battery optimizations
             val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
             intent.data = Uri.parse("package:$packageName")
             startActivity(intent)
         }
 
+        // Android 13 (Tiramisu) 이상에서 POST_NOTIFICATIONS 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerForActivityResult.launch(
                 arrayOf(Manifest.permission.POST_NOTIFICATIONS)
             )
         }
 
-        // Check and request GPS permission
+        // 위치 접근 권한 확인 및 요청
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
             PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE)
         } else {
-            // Permission already granted
+            // 위치 접근 권한이 이미 허용되어 있는 경우 처리할 내용 추가
         }
 
-        // 백그라운드 퍼미션
+        // 백그라운드 위치 접근 권한 확인 및 요청
         val permissionCheck2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         if (permissionCheck2 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), 0)
         }
     }
 
-
-
+    // 권한 요청 결과 처리
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -332,31 +346,33 @@ class startActivity : BaseActivity() {
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
+                // 위치 접근 권한이 허용된 경우 처리할 내용 추가
             } else {
-                // Permission denied
+                // 위치 접근 권한이 거부된 경우 처리할 내용 추가
             }
         }
     }
 
-    //권한 얻는
+    // 여러 권한 요청 결과 처리
     private val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
         when {
             deniedPermissionList.isNotEmpty() -> {
+                // 거부된 권한 목록을 가져와 처리
                 val map = deniedPermissionList.groupBy { permission ->
                     if (shouldShowRequestPermissionRationale(permission)) DENIED else EXPLAINED
                 }
                 map[DENIED]?.let {
-                    // 단순히 권한이 거부 되었을 때
+                    // 권한 요청이 이유와 함께 거부된 경우 처리
                 }
                 map[EXPLAINED]?.let {
-                    // 권한 요청이 완전히 막혔을 때(주로 앱 상세 창 열기)
+                    // 권한 요청이 이유와 함께 거부되지 않은 경우 처리
                 }
             }
             else -> {
-                // 모든 권한이 허가 되었을 때
+                // 모든 권한이 허용된 경우 처리
             }
         }
     }
+
 }
