@@ -56,4 +56,11 @@
     <string name="dialog_email_dup">ล้มเหลว: อีเมลซ้ำ!</string>
     <string name="dialog_signup_fail">ความล้มเหลว: ไอดีที่มีอยู่ก่อนแล้ว</string>
     <string name="dialog_signup_fail_common">การสมัครสมาชิกล้มเหลว</string>
+    <string name="login_fail">ล้มเหลว: โปรดตรวจสอบข้อมูลที่คุณป้อนใหม่อีกครั้ง!</string>
+    <string name="now_not_disaster">ตอนนี้ไม่มีภัยพิบัติค่ะ!</string>
+    <string name="guild_rule">คู่มือ, แนวนโยบาย, การชี้แนะ</string>
+    <string name="guild_safezone">ที่หลบภัยล่าสุด</string>
+    <string name="dialog_title">การร้องขอเสร็จสิ้นแล้วค่ะ!</string>
+    <string name="fail_you_notUser">ความล้มเหลว: ไม่ใช่สมาชิก!</string>
+    <string name="fail_title">ล้มเหลวครับ</string>
 </resources>

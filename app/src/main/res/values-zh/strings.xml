@@ -56,4 +56,11 @@
     <string name="dialog_email_dup">失败: 电子邮件重复 ！</string>
     <string name="dialog_signup_fail">失败: 已存在的用户名 。</string>
     <string name="dialog_signup_fail_common">注册会员失败</string>
+    <string name="login_fail">失败:请再次确认输入的信息！</string>
+    <string name="now_not_disaster">现在没有灾难事项！</string>
+    <string name="guild_rule">指标 ，准则 。</string>
+    <string name="guild_safezone">近邻避难所</string>
+    <string name="dialog_title">请求已完成 ！</string>
+    <string name="fail_you_notUser">失敗:会員がありません!</string>
+    <string name="fail_title">失败。</string>
 </resources>

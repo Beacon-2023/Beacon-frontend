@@ -56,4 +56,11 @@
     <string name="dialog_email_dup">Failed: Duplicate email!</string>
     <string name="dialog_signup_fail">Failed: The ID already exists.</string>
     <string name="dialog_signup_fail_common">Failed to sign up for membership</string>
+    <string name="login_fail">Failed: Please check the information entered again!</string>
+    <string name="now_not_disaster">There are no disasters at this time!</string>
+    <string name="guild_rule">guideline</string>
+    <string name="guild_safezone">Nearby Shelters</string>
+    <string name="dialog_title">Your request has been completed!</string>
+    <string name="fail_you_notUser">Failed: Not a member!</string>
+    <string name="fail_title">You failed.</string>
 </resources>

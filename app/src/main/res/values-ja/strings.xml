@@ -56,4 +56,11 @@
     <string name="dialog_email_dup">失敗: メールが重複しています！</string>
     <string name="dialog_signup_fail">失敗: 既に存在するIDです。</string>
     <string name="dialog_signup_fail_common">会員登録失敗</string>
+    <string name="login_fail">失敗: 入力した情報をもう一度確認してください！</string>
+    <string name="now_not_disaster">今は災害事項がありません！</string>
+    <string name="guild_rule">ガイドライン.</string>
+    <string name="guild_safezone">直近の避難所</string>
+    <string name="dialog_title">リクエストが完了しました！</string>
+    <string name="fail_you_notUser">失敗:会員ではありません！</string>
+    <string name="fail_title">失敗しました。</string>
 </resources>
