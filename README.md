@@ -1,11 +1,13 @@
 
 # beacon
-![image](https://github.com/Boknami/beacon/assets/60930743/cdbde486-9b8f-4540-93cf-6fd000c77b9c)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/5ff74f37-4c92-45fd-84f9-aed16a0f7c3e)
+
 지역별 실시간 재난 속보 및 안전 대응 앱 <br/>
 
 
 ## UI
-![image](https://github.com/Boknami/beacon/assets/60930743/8ee2526f-1b0e-446c-9903-9eba25b9be78)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/82611312-d398-4137-bdfa-5e6eae0e7cb8)
+
 - [UI 프로토타입](https://www.figma.com/file/VZmBL1pLq7F9duVavv523g/Beacon?type=design&mode=design&t=s6PSmorZWrUhLXNN-0)
 
 ##  💡 프로젝트 동기
@@ -25,23 +27,23 @@
 
 ##  📍 기능
 ### 1. 실시간 해당 지역  재난 감시
-![image](https://github.com/Boknami/beacon/assets/60930743/abff315a-574f-4cf8-957b-ae919e5c2229)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/66f07146-f8f9-4c1b-9f2d-d951a5b2cb54)
 
 ### 2. 재난에 따른 가이드라인을 스스로 커스텀 가능
-![image](https://github.com/Boknami/beacon/assets/60930743/1dba4d42-8e3e-4d8b-9341-c9fc6e1eb268)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/632b1386-2509-4eda-9607-7b357b231360)
 
 ### 3. 재난 발생 시 기본 가이드라인 및 최근접 대피소를 제공
-![image](https://github.com/Boknami/beacon/assets/60930743/388d43b3-d4a8-4c7f-932e-69a213fe63e0)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/c4f1d9cb-655a-48b4-b7ea-5540f8ebd7b8)
 
 ### 4. 5개국 언어 지원
-![image](https://github.com/Boknami/beacon/assets/60930743/27d5779b-abbf-4b5e-b3a2-11e58cf65f28)
-
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/160762ee-725c-4596-8223-32231580b735)
 
 ## 로직 및 사용된 기술
 ### 재난상황 인지 로직
 [국민재난안전포털](https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/sfc/dis/disasterMsgList.jsp?menuSeq=679) 에 실시간으로 올라오는 재난문자를 파이썬을 이용해 스크래핑합니다. 그 후 JSON형태로 클라이언트에 보낼 수 있도록 필요한 정보만을 재가공하여 사용자에게 재난 사항을 알려줍니다.
 
-![image](https://github.com/Boknami/beacon/assets/60930743/1b8b7fa2-dd95-43c9-927a-8f090afdf13d)
+![image](https://github.com/Beacon-2023/Beacon-frontend/assets/60930743/948ca410-dea4-4c09-b511-f113d394759f)
+
 
 ### 싱글톤 패턴을 이용한 통신
 싱글톤 패턴을 적용한 OkHttp통신을 이용해 한 개의 인스턴스를 유지하며 통신합니다.
