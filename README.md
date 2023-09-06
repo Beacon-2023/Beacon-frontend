@@ -43,6 +43,20 @@
 
 ![image](https://github.com/Boknami/beacon/assets/60930743/1b8b7fa2-dd95-43c9-927a-8f090afdf13d)
 
+### 싱글톤 패턴을 이용한 통신
+싱글톤 패턴을 적용한 OkHttp통신을 이용해 한 개의 인스턴스를 유지하며 통신합니다.
+```
+object MyOkHttpClient {
+    private val cookieManager = CookieManager().apply {
+        setCookiePolicy(CookiePolicy.ACCEPT_ALL)
+    }
+
+    val instance: OkHttpClient = OkHttpClient.Builder()
+        .cookieJar(JavaNetCookieJar(cookieManager))
+        .build()
+}
+
+```
 
 ### 구조 
 FE : Kotlin<br/>
